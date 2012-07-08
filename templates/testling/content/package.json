@@ -1,0 +1,36 @@
+{
+  "name": "{{project}}",
+  "version": "0.0.1",
+  "description": "{{description}}",
+  "keywords": [],
+  "author": "{{name}} <{{email}}>",
+  "repository": "git://github.com/{{name}}/{{project}}.git",
+  "main": "index",
+  "homepage": "https://github.com/{{name}}/{{project}}",
+  "contributors": [
+    {
+      "name": "Jake Verbaten"
+    }
+  ],
+  "bugs": {
+    "url": "https://github.com/{{name}}/{{project}}/issues",
+    "email": "{{email}}"
+  },
+  "dependencies": {
+  },
+  "devDependencies": {
+    "testling": "git://github.com/Raynos/testling#master",
+    "testem": "git://github.com/Raynos/testem#master",
+    "sinon": "git://github.com/Raynos/Sinon.JS.git",
+    "tap": "0.2.5"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "http://github.com/{{name}}/{{project}}/raw/master/LICENSE"
+    }
+  ],
+  "scripts": {
+    "test": "make node-test"
+  }
+}
