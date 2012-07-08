@@ -1,5 +1,5 @@
 node-test:
-	./node_modules/.bin/tap --stderr ./test/unit.js
+	./node_modules/.bin/tap --stderr ./test
 
 test:
 	./node_modules/.bin/testem \
