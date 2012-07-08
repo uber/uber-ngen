@@ -10,5 +10,5 @@
         , "./index.js"
     ]
     , "node": "node_modules/.bin/tap"
-    , "node-args": ["--tap", "test/unit.js"]
+    , "node-args": ["--tap", "test"]
 }
