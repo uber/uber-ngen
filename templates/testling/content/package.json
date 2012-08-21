@@ -19,10 +19,6 @@
   "dependencies": {
   },
   "devDependencies": {
-    "testling": "git://github.com/Raynos/testling#master",
-    "testem": "git://github.com/Raynos/testem#master",
-    "sinon": "git://github.com/Raynos/Sinon.JS.git",
-    "tap": "0.2.5"
   },
   "licenses": [
     {
@@ -31,6 +27,5 @@
     }
   ],
   "scripts": {
-    "test": "make node-test"
   }
 }
