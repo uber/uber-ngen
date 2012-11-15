@@ -1,0 +1,34 @@
+{
+  "name": "{{project}}",
+  "version": "0.1.0",
+  "description": "{{description}}",
+  "keywords": [],
+  "author": "{{name}} <{{email}}>",
+  "repository": "git://github.com/Colingo/{{project}}.git",
+  "main": "index",
+  "homepage": "https://github.com/Colingo/{{project}}",
+  "contributors": [
+    {
+      "name": "{{name}}"
+    }
+  ],
+  "bugs": {
+    "url": "https://github.com/Colingo/{{project}}/issues",
+    "email": "{{email}}"
+  },
+  "dependencies": {
+  },
+  "devDependencies": {
+    "tap": "~0.3.1"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "http://github.com/Colingo/{{project}}/raw/master/LICENSE"
+    }
+  ],
+  "scripts": {
+    "test": "tap ./test"
+  },
+  "private": true
+}

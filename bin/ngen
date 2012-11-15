@@ -30,7 +30,7 @@ var templates = __dirname + '/../templates';
  * Template.
  */
 
-var template = 'testling';
+var template = 'colingo';
 
 /**
  * Destination path.
@@ -121,7 +121,7 @@ Template.prototype.init = function(dest){
 Template.prototype.__defineGetter__('files', function(){
   var self = this
     , files = [];
-  
+
   (function next(dir) {
     fs.readdirSync(dir).forEach(function(file){
       files.push(file = dir + '/' + file);
