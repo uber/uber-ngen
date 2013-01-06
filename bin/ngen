@@ -18,7 +18,7 @@ var args = process.argv.slice(2);
  * Executable version.
  */
 
-var version = '1.1.0';
+var version = '1.2.0';
 
 /**
  * Templates directory.
@@ -30,7 +30,7 @@ var templates = __dirname + '/../templates';
  * Template.
  */
 
-var template = 'colingo';
+var template = 'testling';
 
 /**
  * Destination path.

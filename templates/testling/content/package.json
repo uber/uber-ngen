@@ -19,7 +19,9 @@
   "dependencies": {
   },
   "devDependencies": {
-    "tap": "~0.3.1"
+    "tape": "0.1.5",
+    "browserify": "https://github.com/raynos/node-browserify/tarball/master",
+    "testem": "0.2.52"
   },
   "licenses": [
     {
@@ -28,6 +30,35 @@
     }
   ],
   "scripts": {
-    "test": "tap --stderr --tap ./test"
+    "test": "node ./test",
+    "build": "browserify test/index.js -o test/bundle.js",
+    "testem": "testem"
+  },
+  "testling": {
+    "files": "test/*.js",
+    "browsers": {
+      "ie": [
+        "8",
+        "9",
+        "10"
+      ],
+      "firefox": [
+        "16",
+        "17",
+        "nightly"
+      ],
+      "chrome": [
+        "22",
+        "23",
+        "canary"
+      ],
+      "opera": [
+        "12",
+        "next"
+      ],
+      "safari": [
+        "5.1"
+      ]
+    }
   }
 }

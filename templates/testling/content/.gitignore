@@ -1,3 +1,15 @@
-node_modules
+.DS_Store
+.monitor
+.*.swp
+.nodemonignore
+releases
 *.log
 *.err
+fleet.json
+public/browserify
+bin/*.json
+.bin
+build
+compile
+.lock-wscript
+**/examples*
