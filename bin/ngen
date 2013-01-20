@@ -36,7 +36,8 @@ var template = 'colingo';
  * Destination path.
  */
 
-var dest = process.cwd();
+var dest;
+var description;
 
 /**
  * Usage information.
@@ -83,6 +84,8 @@ Template.prototype.init = function(dest){
     , vars = this.mod.variables
     , keys = Object.keys(vars);
 
+  self.values.project = dest
+  self.values.description = description
   this.dest = dest;
   console.log();
 
@@ -95,7 +98,7 @@ Template.prototype.init = function(dest){
       next();
     }
 
-    if (key) {
+    if (key && !self.values[key]) {
       desc = vars[key];
       if ('function' == typeof desc) {
         desc(self.values, done);
@@ -104,6 +107,9 @@ Template.prototype.init = function(dest){
       }
     } else {
       process.stdin.destroy();
+      if (!self.dest) {
+        self.dest = self.values.project
+      }
       self.create();
     }
   }
@@ -227,7 +233,11 @@ while (args.length) {
       templates = fs.realpathSync(requireArgument(arg));
       break;
     default:
-      dest = arg;
+      if (!dest) {
+        dest = arg
+      } else if (!description) {
+        description = arg
+      }
   }
 }
 
