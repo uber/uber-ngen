@@ -159,9 +159,12 @@ Template.prototype.create = function(){
       }
     // file
     } else {
-      var str = self.parse(fs.readFileSync(file, 'utf8'));
-      fs.writeFileSync(out, str);
-      console.log('  \033[90mcreate :\033[0m \033[36m%s\033[0m', out);
+
+      if (!fs.existsSync(out)) {
+        var str = self.parse(fs.readFileSync(file, 'utf8'));
+        fs.writeFileSync(out, str);
+        console.log('  \033[90mcreate :\033[0m \033[36m%s\033[0m', out);
+      }
     }
   });
   console.log();
