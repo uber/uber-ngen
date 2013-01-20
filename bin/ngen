@@ -149,7 +149,7 @@ Template.prototype.create = function(){
     var path = self.parse(file)
       , out = join(dest, path.replace(self.contentPath, ''));
 
-    out = out.replace("._gitignore", ".gitignore")
+    out = out.replace(".Xignore", ".gitignore")
 
     // directory
     if (self.directories[file]) {
