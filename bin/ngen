@@ -30,7 +30,7 @@ var templates = __dirname + '/../templates';
  * Template.
  */
 
-var template = 'testling';
+var template = 'colingo';
 
 /**
  * Destination path.
@@ -144,7 +144,6 @@ Template.prototype.__defineGetter__('files', function(){
 
 Template.prototype.create = function(){
   var self = this;
-  console.log();
   this.files.forEach(function(file){
     var path = self.parse(file)
       , out = join(dest, path.replace(self.contentPath, ''));
@@ -161,7 +160,6 @@ Template.prototype.create = function(){
       }
     // file
     } else {
-
       if (!fs.existsSync(out)) {
         var str = self.parse(fs.readFileSync(file, 'utf8'));
         fs.writeFileSync(out, str);
