@@ -1,5 +1,5 @@
 {
-  "name": "raynos-ngen",
+  "name": "colingo-ngen",
   "description": "Package generator (structure, changelogs, tests, package.json, etc)",
   "version": "1.2.1",
   "repository": {
