@@ -9,7 +9,7 @@
   "homepage": "https://github.com/{{name}}/{{project}}",
   "contributors": [
     {
-      "name": "Jake Verbaten"
+      "name": "{{name}}"
     }
   ],
   "bugs": {

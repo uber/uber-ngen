@@ -30,13 +30,14 @@ var templates = __dirname + '/../templates';
  * Template.
  */
 
-var template = 'testling';
+var template = 'colingo';
 
 /**
  * Destination path.
  */
 
-var dest = process.cwd();
+var dest;
+var description;
 
 /**
  * Usage information.
@@ -83,6 +84,8 @@ Template.prototype.init = function(dest){
     , vars = this.mod.variables
     , keys = Object.keys(vars);
 
+  self.values.project = dest
+  self.values.description = description
   this.dest = dest;
   console.log();
 
@@ -95,7 +98,7 @@ Template.prototype.init = function(dest){
       next();
     }
 
-    if (key) {
+    if (key && !self.values[key]) {
       desc = vars[key];
       if ('function' == typeof desc) {
         desc(self.values, done);
@@ -104,6 +107,9 @@ Template.prototype.init = function(dest){
       }
     } else {
       process.stdin.destroy();
+      if (!self.dest) {
+        self.dest = self.values.project
+      }
       self.create();
     }
   }
@@ -144,10 +150,11 @@ Template.prototype.__defineGetter__('files', function(){
 
 Template.prototype.create = function(){
   var self = this;
-  console.log();
   this.files.forEach(function(file){
     var path = self.parse(file)
       , out = join(dest, path.replace(self.contentPath, ''));
+
+    out = out.replace(".Xignore", ".gitignore")
 
     // directory
     if (self.directories[file]) {
@@ -159,9 +166,11 @@ Template.prototype.create = function(){
       }
     // file
     } else {
-      var str = self.parse(fs.readFileSync(file, 'utf8'));
-      fs.writeFileSync(out, str);
-      console.log('  \033[90mcreate :\033[0m \033[36m%s\033[0m', out);
+      if (!fs.existsSync(out)) {
+        var str = self.parse(fs.readFileSync(file, 'utf8'));
+        fs.writeFileSync(out, str);
+        console.log('  \033[90mcreate :\033[0m \033[36m%s\033[0m', out);
+      }
     }
   });
   console.log();
@@ -224,7 +233,11 @@ while (args.length) {
       templates = fs.realpathSync(requireArgument(arg));
       break;
     default:
-      dest = arg;
+      if (!dest) {
+        dest = arg
+      } else if (!description) {
+        description = arg
+      }
   }
 }
 
