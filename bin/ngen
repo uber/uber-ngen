@@ -105,7 +105,7 @@ Template.prototype.init = function(dest){
       } else {
         ask(desc, done);
       }
-    } else {
+    } else if (key === undefined) {
       process.stdin.destroy();
       if (!self.dest) {
         self.dest = self.values.project
