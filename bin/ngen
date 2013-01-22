@@ -98,6 +98,8 @@ Template.prototype.init = function(dest){
       next();
     }
 
+    console.log("nexting", key)
+
     if (key && !self.values[key]) {
       desc = vars[key];
       if ('function' == typeof desc) {
@@ -111,6 +113,8 @@ Template.prototype.init = function(dest){
         self.dest = self.values.project
       }
       self.create();
+    } else {
+      done(self.values[key]);
     }
   }
 
