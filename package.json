@@ -13,5 +13,8 @@
   ],
   "bin": {
     "colingo-ngen": "./bin/ngen"
+  },
+  "devDependencies": {
+    "xtend": "~1.0.3"
   }
 }
