@@ -105,12 +105,14 @@ Template.prototype.init = function(dest){
       } else {
         ask(desc, done);
       }
-    } else {
+    } else if (key === undefined) {
       process.stdin.destroy();
       if (!self.dest) {
         self.dest = self.values.project
       }
       self.create();
+    } else {
+      done(self.values[key]);
     }
   }
 
@@ -149,10 +151,19 @@ Template.prototype.__defineGetter__('files', function(){
  */
 
 Template.prototype.create = function(){
+  // dest
+
+  try {
+    fs.mkdirSync(this.dest, 0775);
+  } catch (err) {
+    // ignore
+  }
+
   var self = this;
+  console.log();
   this.files.forEach(function(file){
     var path = self.parse(file)
-      , out = join(dest, path.replace(self.contentPath, ''));
+      , out = join(self.dest, path.replace(self.contentPath, ''));
 
     out = out.replace(".Xignore", ".gitignore")
 
@@ -245,12 +256,5 @@ while (args.length) {
 
 var tmpl = new Template(template);
 
-// dest
-
-try {
-  fs.mkdirSync(dest, 0775);
-} catch (err) {
-  // ignore
-}
 
 tmpl.init(dest);
