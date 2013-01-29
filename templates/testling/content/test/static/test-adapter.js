@@ -30,8 +30,6 @@
                 if (passed) {
                     results.passed++
                 } else {
-                    console.error("failure", m)
-
                     results.failed++
                 }
 
