@@ -21,7 +21,7 @@
   "devDependencies": {
     "tape": "~0.2.2",
     "browserify": "https://github.com/raynos/node-browserify/tarball/master",
-    "testem": "~0.2.52"
+    "testem": "~0.2.56"
   },
   "licenses": [
     {
