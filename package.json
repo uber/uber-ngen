@@ -2,6 +2,7 @@
   "name": "raynos-ngen",
   "description": "Package generator (structure, changelogs, tests, package.json, etc)",
   "version": "1.2.20",
+  "version": "1.2.27",
   "repository": {
     "type": "git",
     "url": "git://github.com/visionmedia/ngen.git"

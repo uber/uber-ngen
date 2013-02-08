@@ -35,11 +35,9 @@
 
                 results.total++
 
-                // console.log("emitted test", test)
                 socket.emit('test-result', test)
                 results.tests.push(test)
             } else if (msg === '# ok' || msg.match(/^# tests \d+/)){
-                // console.log("emitted all test")
                 socket.emit('all-test-results', results)
             }
 

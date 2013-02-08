@@ -21,7 +21,7 @@
   "devDependencies": {
     "tape": "~0.2.2",
     "browserify": "https://github.com/raynos/node-browserify/tarball/master",
-    "testem": "~0.2.55"
+    "testem": "~0.2.56"
   },
   "licenses": [
     {
@@ -31,7 +31,7 @@
   ],
   "scripts": {
     "test": "node ./test",
-    "build": "browserify test/index.js -o test/static/bundle.js",
+    "build": "browserify test/index.js -o test/static/bundle.js --debug",
     "testem": "testem"
   },
   "testling": {
