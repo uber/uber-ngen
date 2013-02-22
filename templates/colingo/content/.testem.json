@@ -1,7 +1,7 @@
 {
     "launchers": {
         "node": {
-            "command": "npm test"
+            "command": "node ./test"
         }
     },
     "src_files": [
