@@ -30,7 +30,7 @@ var templates = __dirname + '/../templates';
  * Template.
  */
 
-var template = 'colingo';
+var template = 'testling';
 
 /**
  * Destination path.
