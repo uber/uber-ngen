@@ -21,8 +21,8 @@
   "devDependencies": {
     "tape": "~0.2.2",
     "browserify-server": "~2.1.18",
-    "browservefy": "~0.0.7",
-    "testem": "https://github.com/raynos/testem/tarball/master"
+    "browservefy": "https://github.com/raynos/browservefy/tarball/master",
+    "tryme": "https://github.com/raynos/tryme/tarball/master"
   },
   "licenses": [
     {
@@ -31,10 +31,10 @@
     }
   ],
   "scripts": {
-    "test": "testem ci",
-    "build": "browserify-server --bundle=test/index.js -o test/static/bundle.js --debug",
-    "testem": "testem",
-    "example": "browservefy ./examples/simple.js --browserify='browserify-server' --live -- --debug --bundle"
+    "test": "node ./test/index.js",
+    "build-test": "browserify-server --bundle=test/index.js -o test/static/bundle.js --debug",
+    "tryme": "tryme ./examples --live",
+    "example": "browservefy ./examples/simple.js --browserify='browserify-server' --live --indexed=./examples -- --debug --bundle"
   },
   "testling": {
     "files": "test/index.js",
