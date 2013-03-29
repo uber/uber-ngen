@@ -18,29 +18,32 @@
   "devDependencies": {
     "tape": "~0.2.2",
     "browserify-server": "~2.1.18",
-    "browservefy": "~0.0.7",
-    "testem": "~0.2.56"
+    "browservefy": "https://github.com/raynos/browservefy/tarball/master",
+    "tryme": "https://github.com/raynos/tryme/tarball/master"
   },
   "licenses": [{
     "type": "MIT",
     "url": "http://github.com/{{name}}/{{project}}/raw/master/LICENSE"
   }],
   "scripts": {
-    "test": "testem ci",
+    "test": "node ./test/index.js",
     "build-test": "browserify-server --bundle=test/index.js -o test/static/bundle.js --debug",
-    "testem": "testem",
-    "example": "browservefy ./examples/simple.js --browserify='browserify-server' --live -- --debug --bundle"
+    "tryme": "tryme ./examples --live",
+    "example": "browservefy ./examples/simple.js --browserify='browserify-server' --live --indexed=./examples -- --debug --bundle"
   },
   "testling": {
     "files": "test/index.js",
-    "browsers": {
-      "ie": "8..latest",
-      "firefox": ["16..latest", "nightly"],
-      "chrome": ["22..latest", "canary"],
-      "opera": ["12..latest", "next"],
-      "safari": "5.1..latest",
-      "ipad": "6.0..latest",
-      "iphone": "6.0..latest"
-    }
+    "browsers": [
+      "ie/8..latest",
+      "firefox/16..latest",
+      "firefox/nightly",
+      "chrome/22..latest",
+      "chrome/canary",
+      "opera/12..latest",
+      "opera/next",
+      "safari/5.1..latest",
+      "ipad/6.0..latest",
+      "iphone/6.0..latest"
+    ]
   }
 }
