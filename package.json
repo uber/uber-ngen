@@ -1,5 +1,5 @@
 {
-  "name": "raynos-ngen",
+  "name": "colingo-ngen",
   "description": "Package generator (structure, changelogs, tests, package.json, etc)",
   "version": "1.2.41",
   "repository": {
@@ -12,7 +12,7 @@
     "Raynos <raynos2@gmail.com>"
   ],
   "bin": {
-    "ngen": "./bin/ngen"
+    "colingo-ngen": "./bin/ngen"
   },
   "devDependencies": {
     "xtend": "~1.0.3"
