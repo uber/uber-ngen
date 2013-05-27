@@ -16,5 +16,8 @@
   },
   "devDependencies": {
     "xtend": "~1.0.3"
+  },
+  "dependencies": {
+    "camelize": "git://github.com/Raynos/camelize"
   }
 }
