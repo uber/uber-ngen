@@ -1,15 +1,17 @@
 # {{project}}
 
-[![build status][1]][2] [![dependency status][3]][4]
+<!-- [![build status][1]][2] [![dependency status][3]][4] -->
 
-[![browser support][5]][6]
+<!-- [![browser support][5]][6] -->
 
 {{description}}
 
 ## Example
 
 ```js
+var {{projectName}} = require("{{project}}")
 
+// TODO. Show example
 ```
 
 ## Installation
