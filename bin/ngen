@@ -81,7 +81,7 @@ function Template(name) {
 
 Template.prototype.init = function(dest){
   var self = this
-    , vars = this.mod.variables
+    , vars = this.mod
     , keys = Object.keys(vars);
 
   self.values.project = dest
@@ -93,7 +93,12 @@ Template.prototype.init = function(dest){
     var desc
       , key = keys.shift();
 
-    function done(value) {
+    function done(err, value) {
+      if (err) {
+        console.error(err.message)
+        return process.exit(1)
+      }
+
       self.values[key] = String(value).trim();
       next();
     }
@@ -112,7 +117,7 @@ Template.prototype.init = function(dest){
       }
       self.create();
     } else {
-      done(self.values[key]);
+      done(null, self.values[key]);
     }
   }
 
@@ -222,7 +227,9 @@ function requireArgument(flag) {
 function ask(desc, callback) {
   process.stdout.write('  \033[90m' + desc + '\033[0m');
   process.stdin.setEncoding('utf8');
-  process.stdin.once('data', callback).resume();
+  process.stdin.once('data', function (chunk) {
+    callback(null, chunk)
+  }).resume();
 }
 
 // parse arguments

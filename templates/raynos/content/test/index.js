@@ -1,8 +1,8 @@
 var test = require("tape")
 
-var {{project}} = require("../index")
+var {{projectName}} = require("../index")
 
-test("{{project}} is a function", function (assert) {
-    assert.equal(typeof {{project}}, "function")
+test("{{projectName}} is a function", function (assert) {
+    assert.equal(typeof {{projectName}}, "function")
     assert.end()
 })

@@ -1,22 +1,54 @@
 var spawn = require("child_process").spawn
+var camelize = require("camelize")
 
-exports.variables = {
-    project: "Project name: "
-    , description: "Project description: "
-    , name: function(values, callback) {
-        spawn("git", [
+module.exports = {
+    project: "Project name: ",
+    description: "Project description: ",
+    name: function(values, callback) {
+        var called = false
+        var proc = spawn("git", [
             "--bare",
             "config",
             "--global",
             "user.name"
-        ]).stdout.once("data", callback)
-    }
-    , email: function(values, callback) {
-        spawn("git", [
+        ])
+
+        proc.stdout.once("data", function (chunk) {
+            called = true
+            callback(null, chunk)
+        })
+        proc.stdout.once("error", callback)
+        proc.stdout.once("end", function () {
+            if (called) {
+                return
+            }
+
+            callback(new Error("please configure user.name in git"))
+        })
+    },
+    email: function(values, callback) {
+        var called = false
+        var proc = spawn("git", [
             "--bare",
             "config",
             "--global",
             "user.email"
-        ]).stdout.once("data", callback)
+        ])
+
+        proc.stdout.once("data", function (chunk) {
+            called = true
+            callback(null, chunk)
+        })
+        proc.stdout.once("error", callback)
+        proc.stdout.once("end", function () {
+            if (called) {
+                return
+            }
+
+            callback(new Error("please configure user.email in git"))
+        })
+    },
+    projectName: function (values, callback) {
+        callback(null, camelize(values.project))
     }
 }
