@@ -1,4 +1,0 @@
-$(function() {
-  $('body').hide().fadeIn();
-});
-
