@@ -24,17 +24,12 @@
     "browservefy": "https://github.com/raynos/browservefy/tarball/master",
     "tryme": "https://github.com/raynos/tryme/tarball/master"
   },
-  "licenses": [
-    {
-      "type": "MIT",
-      "url": "http://github.com/Colingo/{{project}}/raw/master/LICENSE"
-    }
-  ],
+  "licenses": [{
+    "type": "MIT",
+    "url": "http://github.com/Colingo/{{project}}/raw/master/LICENSE"
+  }],
   "scripts": {
-    "test": "node ./test/index.js",
-    "build-test": "browserify-server --bundle=test/index.js -o test/static/bundle.js --debug",
-    "tryme": "tryme ./examples --live",
-    "example": "browservefy ./examples/simple.js --browserify='browserify-server' --live --indexed=./examples -- --debug --bundle"
+    "test": "node ./test/index.js"
   },
   "testling": {
     "files": "test/index.js",
