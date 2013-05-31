@@ -4,8 +4,6 @@
 
 <!-- [![build status][1]][2] [![NPM version][7]][8] [![dependency status][3]][4] -->
 
-[![NPM version][7]][8]
-
 {{description}}
 
 ## Example
