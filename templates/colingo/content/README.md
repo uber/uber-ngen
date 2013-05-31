@@ -1,8 +1,8 @@
 # {{project}}
 
-<!-- [![build status][1]][2] [![dependency status][3]][4] -->
-
 <!-- [![browser support][5]][6] -->
+
+<!-- [![build status][1]][2] [![NPM version][7]][8] [![dependency status][3]][4] -->
 
 {{description}}
 
@@ -30,3 +30,5 @@ var {{projectName}} = require("{{project}}")
   [4]: https://david-dm.org/Colingo/{{project}}
   [5]: https://ci.testling.com/Colingo/{{project}}.png
   [6]: https://ci.testling.com/Colingo/{{project}}
+  [7]: https://badge.fury.io/js/{{project}}.png
+  [8]: https://badge.fury.io/js/{{project}}
