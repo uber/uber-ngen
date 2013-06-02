@@ -2,7 +2,7 @@
 
 <!-- [![browser support][5]][6] -->
 
-<!-- [![build status][1]][2] [![NPM version][7]][8] [![dependency status][3]][4] -->
+<!-- [![build status][1]][2] [![Coverage Status][9]][10] [![dependency status][ 3]][4] [![NPM version][7]][8] -->
 
 {{description}}
 
@@ -32,3 +32,5 @@ var {{projectName}} = require("{{project}}")
   [6]: https://ci.testling.com/{{name}}/{{project}}
   [7]: https://badge.fury.io/js/{{project}}.png
   [8]: https://badge.fury.io/js/{{project}}
+  [9]: https://coveralls.io/repos/{{name}}/{{project}}/badge.png
+  [10]: https://coveralls.io/r/{{name}}/{{project}}
