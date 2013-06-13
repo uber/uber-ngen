@@ -12,7 +12,7 @@
     "Raynos <raynos2@gmail.com>"
   ],
   "bin": {
-    "ngen": "./bin/ngen"
+    "colingo-ngen": "./bin/ngen"
   },
   "devDependencies": {
     "xtend": "~1.0.3"
