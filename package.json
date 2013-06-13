@@ -1,7 +1,7 @@
 {
   "name": "raynos-ngen",
   "description": "Package generator (structure, changelogs, tests, package.json, etc)",
-  "version": "1.3.10",
+  "version": "1.3.11",
   "repository": {
     "type": "git",
     "url": "git://github.com/visionmedia/ngen.git"
