@@ -68,7 +68,9 @@ function Template(name) {
   this.path = templates + '/' + name;
   this.contentPath = this.path + '/content';
   this.mod = require(this.path);
-  this.values = {};
+  this.values = {
+    year: new Date().getFullYear()
+  }
   this.directories = {};
 }
 
