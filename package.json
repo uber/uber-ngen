@@ -11,6 +11,7 @@
     "Irakli Gozalishvili <rfobic@gmail.com> (http://jeditoolkit.com)",
     "Raynos <raynos2@gmail.com>"
   ],
+  "repository": "http://github.com/Raynos/ngen/tree/colingo",
   "bin": {
     "colingo-ngen": "./bin/ngen"
   },
