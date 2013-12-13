@@ -5,7 +5,9 @@
 
 ## Installation
 
-    $ npm install uber-ngen -g
+```bash
+$ npm install uber-ngen -g
+```
 
 ## Example
 
@@ -20,14 +22,16 @@ Run `uber-ngen {{name}} {{description}}` and fill in no fields.
 ## Usage
 
 
-    Usage: uber-ngen [options] [path]
+```
+Usage: uber-ngen [options] [path]
 
-    Options:
+Options:
 
-      -t, --template <name>   Use the template <name>
-      -d, --directory <path>  Use the template directory <path>
-      -V, --version           Output the current version
-      -h, --help              Display help information
+  -t, --template <name>   Use the template <name>
+  -d, --directory <path>  Use the template directory <path>
+  -V, --version           Output the current version
+  -h, --help              Display help information
+```
 
 
 ## Templates
