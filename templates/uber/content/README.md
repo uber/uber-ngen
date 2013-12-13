@@ -5,7 +5,7 @@
 ## Example
 
 ```js
-var {{projectName}} = require("{{project}}")
+var {{projectName}} = require("{{project}}");
 
 // TODO. Show example
 ```
