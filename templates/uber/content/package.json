@@ -1,0 +1,31 @@
+{
+  "name": "{{project}}",
+  "version": "1.0.0",
+  "description": "{{description}}",
+  "keywords": [],
+  "author": "Uber Dev<dev@uber.com>",
+  "repository": "git://github.com/uber/{{project}}.git",
+  "main": "index",
+  "homepage": "https://github.com/uber/{{project}}",
+  "bugs": {
+    "url": "https://github.com/uber/{{project}}/issues",
+    "email": "{{email}}"
+  },
+  "dependencies": {
+  },
+  "devDependencies": {
+    "mocha": "~1.15.1",
+    "jshint": "~2.3.0",
+    "istanbul": "~0.1.46"
+  },
+  "scripts": {
+    "test": "npm run jshint && mocha --reporter tap ./test 2>&1 | tee ./test/test.js.tap",
+    "jshint": "jshint --verbose --config jshint.json .",
+    "cover": "istanbul cover --report none --print detail _mocha",
+    "view-cover": "istanbul report html && open ./coverage/index.html"
+  },
+  "engine": {
+    "node": "0.8.x"
+  },
+  "private": true
+}
