@@ -5,7 +5,7 @@
 
 ## Installation
 
-    $ npm install uber-ngen
+    $ npm install uber-ngen -g
 
 ## Example
 
