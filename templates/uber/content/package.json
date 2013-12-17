@@ -15,17 +15,17 @@
   },
   "devDependencies": {
     "mocha": "~1.15.1",
-    "jshint": "~2.3.0",
+    "jshint": "jshint/jshint#2.x",
     "istanbul": "~0.1.46"
   },
   "scripts": {
     "test": "npm run jshint && mocha --reporter tap ./test 2>&1 | tee ./test/test.js.tap",
-    "jshint": "jshint --verbose --config jshint.json .",
+    "jshint": "jshint --verbose --exclude-path .gitignore --config jshint.json .",
     "cover": "istanbul cover --report none --print detail _mocha",
     "view-cover": "istanbul report html && open ./coverage/index.html"
   },
   "engine": {
-    "node": ">= 0.8"
+    "node": ">= 0.8g"
   },
   "private": true
 }
