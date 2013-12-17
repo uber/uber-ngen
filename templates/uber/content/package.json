@@ -25,7 +25,7 @@
     "view-cover": "istanbul report html && open ./coverage/index.html"
   },
   "engine": {
-    "node": "0.8.x"
+    "node": ">= 0.8"
   },
   "private": true
 }
