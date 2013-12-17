@@ -5,42 +5,54 @@
 
 ## Installation
 
-    $ npm install ngen
+```bash
+$ npm install uber-ngen -g
+```
+
+## Example
+
+You can use `uber-ngen` in three modes.
+
+Run `uber-ngen` and then fill in the two fields for name & description.
+Run `uber-ngen {{name}}` and then fill in the field for description
+Run `uber-ngen {{name}} {{description}}` and fill in no fields.
+
+`uber-ngen` will generate a folder that is called `{{name}}` in your CWD.
 
 ## Usage
 
 
-    Usage: ngen [options] [path]
+```
+Usage: uber-ngen [options] [path]
 
-    Options:
+Options:
 
-      -t, --template <name>   Use the template <name>
-      -d, --directory <path>  Use the template directory <path>
-      -V, --version           Output the current version
-      -h, --help              Display help information
+  -t, --template <name>   Use the template <name>
+  -d, --directory <path>  Use the template directory <path>
+  -V, --version           Output the current version
+  -h, --help              Display help information
+```
 
 
 ## Templates
 
-### Default
+### Uber
 
- Currently the only available template, creating the following structure populated with content after the following questions are asked from the cli:
+Currently the only available template, creating the following structure
+ populated with content after the following questions are asked from the cli:
 
-       Project name: foo
-       Enter your name: TJ Holowaychuk
-       Enter your email: tj@vision-media.ca
-       Project description: awesome foo-ness
+     Project Name: rt-uncaught-exception
+     Project description: Our default uncaught exception handler
 
 structure:
  
-     ./History.md
-     ./Readme.md
+     ./test/index.js
+     ./.jshintignore
+     ./.gitignore
      ./index.js
-     ./lib/<project>.js
-     ./test/<project>.test.js
-     ./support
-     ./Makefile
+     ./jshint.json
      ./package.json
+     ./README.md
 
 ## License 
 
