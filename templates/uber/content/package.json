@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "{{description}}",
   "keywords": [],
-  "author": "Uber Dev<dev@uber.com>",
+  "author": "{{name}} <{{email}}>",
   "repository": "git://github.com/uber/{{project}}.git",
   "main": "index",
   "homepage": "https://github.com/uber/{{project}}",
