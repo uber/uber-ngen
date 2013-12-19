@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "{{description}}",
   "keywords": [],
-  "author": "Uber Dev<dev@uber.com>",
+  "author": "{{name}} <{{email}}>",
   "repository": "git://github.com/uber/{{project}}.git",
   "main": "index",
   "homepage": "https://github.com/uber/{{project}}",
@@ -25,7 +25,7 @@
     "view-cover": "istanbul report html && open ./coverage/index.html"
   },
   "engine": {
-    "node": ">= 0.8g"
+    "node": ">= 0.8.x"
   },
   "private": true
 }
