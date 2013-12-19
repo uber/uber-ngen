@@ -9,7 +9,9 @@
   "author": "TJ Holowaychuk <tj@vision-media.ca>",
   "contributors": [
     "Irakli Gozalishvili <rfobic@gmail.com> (http://jeditoolkit.com)",
-    "Raynos <raynos2@gmail.com>"
+    "Raynos <raynos2@gmail.com>",
+    "dfellis <d.f.ellis@ieee.org>",
+    "twolfson <todd@twolfson.com>"
   ],
   "bin": {
     "uber-ngen": "./bin/ngen"
