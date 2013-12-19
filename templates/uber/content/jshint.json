@@ -17,7 +17,6 @@
     "unused": true,
     "strict": false,
     "trailing": true,
-    "node": true,
     "noempty": true,
     "maxdepth": 4,
     "maxparams": 4,
@@ -27,6 +26,13 @@
         "setTimeout": true,
         "clearTimeout": true,
         "setInterval": true,
-        "clearInterval": true
+        "clearInterval": true,
+        "require": false,
+        "module": false,
+        "exports": true,
+        "global": false,
+        "process": true,
+        "__dirname": false,
+        "__filename": false
     }
 }
