@@ -1,117 +1,25 @@
 #!/usr/bin/env node
-// vim:ft=javascript:
 
-/**
- * Module dependencies.
- */
-
-var fs = require('fs')
-  , join = require('path').join
-  , Template = require('../index.js');
-
-/**
- * Arguments.
- */
-
-var args = process.argv.slice(2);
-
-/**
- * Executable version.
- */
-
-var version = '1.2.0';
-
-/**
- * Templates directory.
- */
-
-var templates = __dirname + '/../templates';
-
-/**
- * Template.
- */
-
-var template = 'uber';
-
-/**
- * Destination path.
- */
-
-var dest;
-var description;
-
-/**
- * Usage information.
- */
-
-var usage = [
-    ''
-  , '  Usage: ngen [options] [path]'
-  , ''
-  , '  Options:'
-  , ''
-  , '    -t, --template <name>   Use the template <name>'
-  , '    -d, --directory <path>  Use the template directory <path>'
-  , '    -V, --version           Output the current version'
-  , '    -h, --help              Display help information'
-  , ''
-].join('\n');
-
-/**
- * Require argument for `flag`.
- */
-
-function requireArgument(flag) {
-  if (args.length) {
-    return args.shift();
-  } else {
-    console.error(flag + ' requires an argument');
-    process.exit(1);
-  }
-}
-
-/**
- * Ask for user input.
- */
-
-function ask(desc, callback) {
-  process.stdout.write('  \033[90m' + desc + '\033[0m');
-  process.stdin.setEncoding('utf8');
-  process.stdin.once('data', function (chunk) {
-    callback(null, chunk)
-  }).resume();
-}
+var fs = require('fs');
+var path = require('path');
+var argv = require('optimist').argv;
+var Template = require('../index.js');
 
 // parse arguments
-
-var arg;
-while (args.length) {
-  switch (arg = args.shift()) {
-    case '-h':
-    case '--help':
-      console.log(usage);
-      process.exit();
-      break;
-    case '-t':
-    case '--template':
-      template = requireArgument(arg);
-      break;
-    case '-d':
-    case '--directory':
-      templates = fs.realpathSync(requireArgument(arg));
-      break;
-    default:
-      if (!dest) {
-        dest = arg
-      } else if (!description) {
-        description = arg
-      }
-  }
+if (argv.h || argv.help || argv._.length === 0) {
+    return fs.createReadStream(path.join(__dirname, 'usage.txt'))
+        .pipe(process.stdout);
 }
 
+var template = argv.t || argv.template || 'uber';
+var templates = argv.d || argv.directory ||
+    path.join(__dirname, '..', 'templates');
+var dest = argv._[0];
+var description = argv._[1];
+
 // create template
-
-var tmpl = new Template(template);
-
-
+var tmpl = new Template(template, {
+    templates: templates,
+    description: description
+});
 tmpl.init(dest);

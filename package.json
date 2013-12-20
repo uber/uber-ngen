@@ -21,7 +21,8 @@
     "twolfson <todd@twolfson.com>"
   ],
   "dependencies": {
-    "camelize": "~0.1.2"
+    "camelize": "~0.1.2",
+    "optimist": "~0.6.0"
   },
   "licenses": [
     {
@@ -29,12 +30,9 @@
       "url": "http://github.com/uber/uber-ngen/raw/master/LICENCE"
     }
   ],
-  "devDependencies": {
-    "xtend": "~1.0.3"
-  },
-   "scripts": {
-    "test": "npm run jshint && mocha --reporter tap ./test 2>&1 | tee ./test/test.js.tap",
-    "jshint": "jshint --verbose --exclude-path .gitignore --config jshint.json ."
+  "scripts": {
+    "test": "npm run jshint",
+    "jshint": "jshint --verbose --exclude-path .gitignore --exclude templates/uber/content --config jshint.json ."
   },
   "bin": {
     "uber-ngen": "./bin/ngen"
