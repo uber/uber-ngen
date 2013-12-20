@@ -22,7 +22,9 @@
   ],
   "dependencies": {
     "camelize": "~0.1.2",
-    "optimist": "~0.6.0"
+    "optimist": "~0.6.0",
+    "promptly": "~0.2.0",
+    "chalk": "~0.4.0"
   },
   "licenses": [
     {

@@ -1,17 +1,7 @@
 var fs = require('fs');
 var join = require('path').join;
-
-/**
- * Ask for user input.
- */
-
-function ask(desc, callback) {
-    process.stdout.write('  \033[90m' + desc + '\033[0m');
-    process.stdin.setEncoding('utf8');
-    process.stdin.once('data', function (chunk) {
-        callback(null, chunk);
-    }).resume();
-}
+var prompt = require('promptly').prompt;
+var chalk = require('chalk');
 
 /**
  * Initialize a new `Template` with the given `name`.
@@ -48,9 +38,10 @@ Template.prototype.init = function(dest){
     self.values.project = dest;
     self.values.description = this.description;
     self.dest = dest;
+    // print new line for pretties.
     console.log();
 
-    function next() {
+    function parseLocal() {
         var desc;
         var key = keys.shift();
 
@@ -61,7 +52,7 @@ Template.prototype.init = function(dest){
             }
 
             self.values[key] = String(value).trim();
-            next();
+            parseLocal();
         }
 
         if (key && !self.values[key]) {
@@ -69,7 +60,7 @@ Template.prototype.init = function(dest){
             if ('function' === typeof desc) {
                 desc(self.values, done);
             } else {
-                ask(desc, done);
+                prompt(chalk.gray('  ' + desc.trim()), done);
             }
         } else if (key === undefined) {
             process.stdin.destroy();
@@ -82,7 +73,7 @@ Template.prototype.init = function(dest){
         }
     }
 
-    next();
+    parseLocal();
 };
 
 /**
@@ -97,13 +88,13 @@ Object.defineProperty(Template.prototype, 'files', {
         var self = this;
         var files = [];
 
-        (function next(dir) {
+        (function readdirs(dir) {
             fs.readdirSync(dir).forEach(function(file){
                 files.push(file = dir + '/' + file);
                 var stat = fs.statSync(file);
                 if (stat.isDirectory()) {
                     self.directories[file] = true;
-                    next(file);
+                    readdirs(file);
                 }
             });
         })(this.contentPath);
