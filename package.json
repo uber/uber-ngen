@@ -1,25 +1,42 @@
 {
   "name": "uber-ngen",
-  "description": "Package generator (structure, changelogs, tests, package.json, etc)",
   "version": "1.0.1",
+  "description": "Package generator (structure, changelogs, tests, package.json, etc)",
+  "keywords": [],
+  "author": "TJ Holowaychuk <tj@vision-media.ca>",
   "repository": {
     "type": "git",
     "url": "git://github.com/uber/uber-ngen.git"
   },
-  "author": "TJ Holowaychuk <tj@vision-media.ca>",
+  "main": "index",
+  "homepage": "https://github.com/uber/uber-ngen",
+  "bugs": {
+    "url": "https://github.com/uber/uber-ngen/issues",
+    "email": "raynos2@gmail.com"
+  },
   "contributors": [
     "Irakli Gozalishvili <rfobic@gmail.com> (http://jeditoolkit.com)",
     "Raynos <raynos2@gmail.com>",
     "dfellis <d.f.ellis@ieee.org>",
     "twolfson <todd@twolfson.com>"
   ],
+  "dependencies": {
+    "camelize": "~0.1.2",
+    "optimist": "~0.6.0",
+    "promptly": "~0.2.0",
+    "chalk": "~0.4.0"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "http://github.com/uber/uber-ngen/raw/master/LICENCE"
+    }
+  ],
+  "scripts": {
+    "test": "npm run jshint",
+    "jshint": "jshint --verbose --exclude-path .gitignore --exclude templates/uber/content --config jshint.json ."
+  },
   "bin": {
     "uber-ngen": "./bin/ngen"
-  },
-  "devDependencies": {
-    "xtend": "~1.0.3"
-  },
-  "dependencies": {
-    "camelize": "git://github.com/Raynos/camelize"
   }
 }

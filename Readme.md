@@ -23,7 +23,7 @@ Run `uber-ngen {{name}} {{description}}` and fill in no fields.
 
 
 ```
-Usage: uber-ngen [options] [path]
+Usage: uber-ngen [name] [description]
 
 Options:
 
