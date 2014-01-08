@@ -22,4 +22,11 @@ var tmpl = new Template(template, {
     templates: templates,
     description: description
 });
-tmpl.init(dest);
+tmpl.init(dest, function (err) {
+    if (err) {
+        console.error(err.message);
+        return process.exit(1);
+    }
+
+    process.stdin.destroy();
+});

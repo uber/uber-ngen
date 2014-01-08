@@ -34,7 +34,7 @@ function Template(name, opts) {
  * @api private
  */
 
-Template.prototype.init = function(dest){
+Template.prototype.init = function(dest, callback) {
     var self = this;
     var vars = this.mod;
     var keys = Object.keys(vars);
@@ -51,8 +51,7 @@ Template.prototype.init = function(dest){
 
         function done(err, value) {
             if (err) {
-                console.error(err.message);
-                return process.exit(1);
+                return callback(err);
             }
 
             self.values[key] = String(value).trim();
@@ -67,11 +66,11 @@ Template.prototype.init = function(dest){
                 prompt(chalk.gray('  ' + desc.trim()), done);
             }
         } else if (key === undefined) {
-            process.stdin.destroy();
             if (!self.dest) {
                 self.dest = self.values.project;
             }
             self.create();
+            if (callback) callback();
         } else {
             done(null, self.values[key]);
         }
@@ -113,7 +112,7 @@ Object.defineProperty(Template.prototype, 'files', {
  * @api private
  */
 
-Template.prototype.create = function(){
+Template.prototype.create = function() {
   // dest
 
     try {
