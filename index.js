@@ -11,6 +11,10 @@ var chalk = require('chalk');
  */
 
 function Template(name, opts) {
+    if (!(this instanceof Template)) {
+        return new Template(name, opts);
+    }
+
     this.templates = opts.templates;
     this.description = opts.description;
     this.name = name;
