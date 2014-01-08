@@ -136,7 +136,9 @@ Template.prototype.create = function() {
         if (self.directories[file]) {
             try {
                 fs.mkdirSync(out, 0775);
-                self.logger.log('  \033[90mcreate :\033[0m \033[36m%s\033[0m', out);
+                self.logger.log(
+                    chalk.gray('  create :'),
+                    chalk.cyan(out));
             } catch (err) {
                 // ignore
             }
@@ -145,7 +147,9 @@ Template.prototype.create = function() {
             if (!fs.existsSync(out)) {
                 var str = self.parse(fs.readFileSync(file, 'utf8'));
                 fs.writeFileSync(out, str);
-                self.logger.log('  \033[90mcreate :\033[0m \033[36m%s\033[0m', out);
+                self.logger.log(
+                    chalk.gray('  create :'),
+                    chalk.cyan(out));
             }
         }
     });
