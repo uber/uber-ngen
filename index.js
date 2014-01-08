@@ -91,25 +91,23 @@ Template.prototype.init = function(dest, callback) {
  * @api private
  */
 
-Object.defineProperty(Template.prototype, 'files', {
-    get: function() {
-        var self = this;
-        var files = [];
+Template.prototype.files = function() {
+    var self = this;
+    var files = [];
 
-        (function readdirs(dir) {
-            fs.readdirSync(dir).forEach(function(file){
-                files.push(file = dir + '/' + file);
-                var stat = fs.statSync(file);
-                if (stat.isDirectory()) {
-                    self.directories[file] = true;
-                    readdirs(file);
-                }
-            });
-        })(this.contentPath);
+    (function readdirs(dir) {
+        fs.readdirSync(dir).forEach(function(file){
+            files.push(file = dir + '/' + file);
+            var stat = fs.statSync(file);
+            if (stat.isDirectory()) {
+                self.directories[file] = true;
+                readdirs(file);
+            }
+        });
+    })(this.contentPath);
 
-        return files;
-    }
-});
+    return files;
+};
 
 /**
  * Create the template files.
@@ -128,7 +126,7 @@ Template.prototype.create = function() {
 
     var self = this;
     self.logger.log();
-    self.files.forEach(function(file){
+    self.files().forEach(function(file){
         var uri = self.parse(file);
         var out = join(self.dest, uri.replace(self.contentPath, ''));
 
