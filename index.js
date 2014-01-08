@@ -41,11 +41,11 @@ function Template(name, opts) {
 
 Template.prototype.init = function(dest, callback) {
     var self = this;
-    var vars = this.mod;
+    var vars = self.mod;
     var keys = Object.keys(vars);
 
     self.values.project = dest;
-    self.values.description = this.description;
+    self.values.description = self.description;
     self.dest = dest;
     // print new line for pretties.
     self.logger.log();
@@ -104,7 +104,7 @@ Template.prototype.files = function() {
                 readdirs(file);
             }
         });
-    })(this.contentPath);
+    })(self.contentPath);
 
     return files;
 };
@@ -116,15 +116,14 @@ Template.prototype.files = function() {
  */
 
 Template.prototype.create = function() {
-  // dest
+    var self = this;
 
     try {
-        fs.mkdirSync(this.dest, 0775);
+        fs.mkdirSync(self.dest, 0775);
     } catch (err) {
         // ignore
     }
 
-    var self = this;
     self.logger.log();
     self.files().forEach(function(file){
         var uri = self.parse(file);
