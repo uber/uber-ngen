@@ -20,7 +20,8 @@ var description = argv._[1];
 // create template
 var tmpl = new Template(template, {
     templates: templates,
-    description: description
+    description: description,
+    logger: console
 });
 tmpl.init(dest, function (err) {
     if (err) {

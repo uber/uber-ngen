@@ -3,6 +3,8 @@ var join = require('path').join;
 var prompt = require('promptly').prompt;
 var chalk = require('chalk');
 
+function noop() {}
+
 /**
  * Initialize a new `Template` with the given `name`.
  *
@@ -18,6 +20,9 @@ function Template(name, opts) {
     this.templates = opts.templates;
     this.description = opts.description;
     this.name = name;
+    this.logger = opts.logger || {
+        log: noop
+    };
     this.path = join(this.templates, name);
     this.contentPath = this.path + '/content';
     this.mod = require(this.path);
@@ -43,7 +48,7 @@ Template.prototype.init = function(dest, callback) {
     self.values.description = this.description;
     self.dest = dest;
     // print new line for pretties.
-    console.log();
+    self.logger.log();
 
     function parseLocal() {
         var desc;
@@ -122,7 +127,7 @@ Template.prototype.create = function() {
     }
 
     var self = this;
-    console.log();
+    self.logger.log();
     self.files.forEach(function(file){
         var uri = self.parse(file);
         var out = join(self.dest, uri.replace(self.contentPath, ''));
@@ -133,7 +138,7 @@ Template.prototype.create = function() {
         if (self.directories[file]) {
             try {
                 fs.mkdirSync(out, 0775);
-                console.log('  \033[90mcreate :\033[0m \033[36m%s\033[0m', out);
+                self.logger.log('  \033[90mcreate :\033[0m \033[36m%s\033[0m', out);
             } catch (err) {
                 // ignore
             }
@@ -142,11 +147,11 @@ Template.prototype.create = function() {
             if (!fs.existsSync(out)) {
                 var str = self.parse(fs.readFileSync(file, 'utf8'));
                 fs.writeFileSync(out, str);
-                console.log('  \033[90mcreate :\033[0m \033[36m%s\033[0m', out);
+                self.logger.log('  \033[90mcreate :\033[0m \033[36m%s\033[0m', out);
             }
         }
     });
-    console.log();
+    self.logger.log();
 };
 
 /**
