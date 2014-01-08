@@ -54,6 +54,22 @@ structure:
      ./package.json
      ./README.md
 
+## Docs
+
+`uber-ngen` can also be called directly
+
+```js
+var Template = require('uber-ngen')
+
+var t = Template('name-of-template', {
+  templates: 'folder location of templates'
+})
+t.init('target location to write on disk', function (err) {
+  // scaffolded the template to the location
+  // calling init() will prompt on STDIN.
+})
+```
+
 ## License 
 
 (The MIT License)
