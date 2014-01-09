@@ -3,6 +3,8 @@ var join = require('path').join;
 var prompt = require('promptly').prompt;
 var chalk = require('chalk');
 
+function noop() {}
+
 /**
  * Initialize a new `Template` with the given `name`.
  *
@@ -18,6 +20,9 @@ function Template(name, opts) {
     this.templates = opts.templates;
     this.description = opts.description;
     this.name = name;
+    this.logger = opts.logger || {
+        log: noop
+    };
     this.path = join(this.templates, name);
     this.contentPath = this.path + '/content';
     this.mod = require(this.path);
@@ -34,16 +39,16 @@ function Template(name, opts) {
  * @api private
  */
 
-Template.prototype.init = function(dest){
+Template.prototype.init = function(dest, callback) {
     var self = this;
-    var vars = this.mod;
+    var vars = self.mod;
     var keys = Object.keys(vars);
 
     self.values.project = dest;
-    self.values.description = this.description;
+    self.values.description = self.description;
     self.dest = dest;
     // print new line for pretties.
-    console.log();
+    self.logger.log();
 
     function parseLocal() {
         var desc;
@@ -51,8 +56,7 @@ Template.prototype.init = function(dest){
 
         function done(err, value) {
             if (err) {
-                console.error(err.message);
-                return process.exit(1);
+                return callback(err);
             }
 
             self.values[key] = String(value).trim();
@@ -67,11 +71,11 @@ Template.prototype.init = function(dest){
                 prompt(chalk.gray('  ' + desc.trim()), done);
             }
         } else if (key === undefined) {
-            process.stdin.destroy();
             if (!self.dest) {
                 self.dest = self.values.project;
             }
             self.create();
+            if (callback) callback();
         } else {
             done(null, self.values[key]);
         }
@@ -87,25 +91,23 @@ Template.prototype.init = function(dest){
  * @api private
  */
 
-Object.defineProperty(Template.prototype, 'files', {
-    get: function() {
-        var self = this;
-        var files = [];
+Template.prototype.files = function() {
+    var self = this;
+    var files = [];
 
-        (function readdirs(dir) {
-            fs.readdirSync(dir).forEach(function(file){
-                files.push(file = dir + '/' + file);
-                var stat = fs.statSync(file);
-                if (stat.isDirectory()) {
-                    self.directories[file] = true;
-                    readdirs(file);
-                }
-            });
-        })(this.contentPath);
+    (function readdirs(dir) {
+        fs.readdirSync(dir).forEach(function(file){
+            files.push(file = dir + '/' + file);
+            var stat = fs.statSync(file);
+            if (stat.isDirectory()) {
+                self.directories[file] = true;
+                readdirs(file);
+            }
+        });
+    })(self.contentPath);
 
-        return files;
-    }
-});
+    return files;
+};
 
 /**
  * Create the template files.
@@ -113,18 +115,17 @@ Object.defineProperty(Template.prototype, 'files', {
  * @api private
  */
 
-Template.prototype.create = function(){
-  // dest
+Template.prototype.create = function() {
+    var self = this;
 
     try {
-        fs.mkdirSync(this.dest, 0775);
+        fs.mkdirSync(self.dest, 0775);
     } catch (err) {
         // ignore
     }
 
-    var self = this;
-    console.log();
-    self.files.forEach(function(file){
+    self.logger.log();
+    self.files().forEach(function(file){
         var uri = self.parse(file);
         var out = join(self.dest, uri.replace(self.contentPath, ''));
 
@@ -134,7 +135,9 @@ Template.prototype.create = function(){
         if (self.directories[file]) {
             try {
                 fs.mkdirSync(out, 0775);
-                console.log('  \033[90mcreate :\033[0m \033[36m%s\033[0m', out);
+                self.logger.log(
+                    chalk.gray('  create :'),
+                    chalk.cyan(out));
             } catch (err) {
                 // ignore
             }
@@ -143,11 +146,13 @@ Template.prototype.create = function(){
             if (!fs.existsSync(out)) {
                 var str = self.parse(fs.readFileSync(file, 'utf8'));
                 fs.writeFileSync(out, str);
-                console.log('  \033[90mcreate :\033[0m \033[36m%s\033[0m', out);
+                self.logger.log(
+                    chalk.gray('  create :'),
+                    chalk.cyan(out));
             }
         }
     });
-    console.log();
+    self.logger.log();
 };
 
 /**

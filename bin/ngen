@@ -20,6 +20,14 @@ var description = argv._[1];
 // create template
 var tmpl = new Template(template, {
     templates: templates,
-    description: description
+    description: description,
+    logger: console
 });
-tmpl.init(dest);
+tmpl.init(dest, function (err) {
+    if (err) {
+        console.error(err.message);
+        return process.exit(1);
+    }
+
+    process.stdin.destroy();
+});
