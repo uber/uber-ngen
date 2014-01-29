@@ -14,14 +14,15 @@
   "dependencies": {
   },
   "devDependencies": {
-    "mocha": "~1.15.1",
-    "jshint": "jshint/jshint#2.x",
+    "mocha": "~1.17.1",
+    "jshint": "2.4.2",
     "istanbul": "~0.1.46"
   },
   "scripts": {
-    "test": "npm run jshint && mocha --reporter tap ./test 2>&1 | tee ./test/test.js.tap",
-    "jshint": "jshint --verbose --exclude-path .gitignore --config jshint.json .",
+    "test": "npm run jshint && NODE_ENV=test mocha --reporter spec",
+    "jshint": "jshint --verbose --exclude-path .gitignore .",
     "cover": "istanbul cover --report none --print detail _mocha",
+    "shrinkwrap": "rm npm-shrinkwrap.json; rm -rf ./node_modules && npm cache clear && npm --registry=http://archive.uber.com/npm install && npm shrinkwrap --depth 100 --dev",
     "view-cover": "istanbul report html && open ./coverage/index.html"
   },
   "engine": {
