@@ -1,4 +1,4 @@
-var test = global.it;
+var test = require('mocha').it;
 var assert = require('assert');
 
 var {{projectName}} = require('../index.js');
