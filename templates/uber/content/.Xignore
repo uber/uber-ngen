@@ -39,8 +39,10 @@ node_modules/
 ######################
 *.log
 dump.rdb
+*.tap
 *.js.tap
 *.coffee.tap
+*.xml
 
 # OS generated files #
 ######################
@@ -56,6 +58,7 @@ coverage
 *.swp
 *.swo
 .idea/
+.jshintrc
 
 *.pyc
 

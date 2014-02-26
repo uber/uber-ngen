@@ -34,9 +34,12 @@
   ],
   "scripts": {
     "test": "npm run jshint",
-    "jshint": "jshint --verbose --exclude-path .gitignore --exclude templates/uber/content --config jshint.json ."
+    "jshint": "jshint --verbose --exclude-path .gitignore --exclude templates/uber/content ."
   },
   "bin": {
     "uber-ngen": "./bin/ngen"
+  },
+  "devDependencies": {
+    "pre-commit": "0.0.4"
   }
 }
