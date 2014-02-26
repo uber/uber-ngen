@@ -16,7 +16,8 @@
   "devDependencies": {
     "mocha": "~1.17.1",
     "jshint": "2.4.2",
-    "istanbul": "~0.1.46"
+    "istanbul": "~0.2.4",
+    "pre-commit": "0.0.4"
   },
   "scripts": {
     "test": "npm run jshint && NODE_ENV=test mocha --reporter spec",
