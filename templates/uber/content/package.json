@@ -21,7 +21,7 @@
   },
   "scripts": {
     "test": "npm run jshint && NODE_ENV=test mocha --reporter spec",
-    "jshint": "jshint --exclude-path .gitignore .",
+    "jshint": "jshint --verbose --exclude-path .gitignore .",
     "cover": "istanbul cover --report none --print detail _mocha",
     "view-cover": "istanbul report html && open ./coverage/index.html"
   },
