@@ -40,8 +40,6 @@ node_modules/
 *.log
 dump.rdb
 *.tap
-*.js.tap
-*.coffee.tap
 *.xml
 
 # OS generated files #
@@ -55,12 +53,13 @@ coverage
 
 # Text Editor Byproducts #
 ##########################
-*.swp
-*.swo
+*.sw?
 .idea/
 .jshintrc
 
-*.pyc
+# Python object code
+##########################
+*.py[oc]
 
 # All translation files #
 #########################
