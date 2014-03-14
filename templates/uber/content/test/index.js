@@ -1,9 +1,8 @@
-var test = require('mocha').it;
-var assert = require('assert');
+var test = require('tape');
 
 var {{projectName}} = require('../index.js');
 
-test('{{projectName}} is a function', function (end) {
+test('{{projectName}} is a function', function (assert) {
     assert.strictEqual(typeof {{projectName}}, 'function');
-    end();
+    assert.end();
 });
