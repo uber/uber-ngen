@@ -2,6 +2,8 @@ var spawn = require('child_process').spawn;
 var camelize = require('camelize');
 var format = require('util').format;
 
+var version = require('../../package.json').version;
+
 function fetchFromGitConfig(key) {
     function readValue(values, callback) {
         var called = false;
@@ -32,6 +34,9 @@ function fetchFromGitConfig(key) {
 
 module.exports = {
     project: 'Project name: ',
+    version: function (values, callback) {
+        callback(null, version);
+    },
     description: 'Project description: ',
     name: fetchFromGitConfig('user.name'),
     email: fetchFromGitConfig('user.email'),
