@@ -29,5 +29,6 @@
   "engine": {
     "node": ">= 0.8.x"
   },
-  "private": true
+  "private": true,
+  "uber-ngen-version": "{{version}}"
 }

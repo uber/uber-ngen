@@ -152,7 +152,13 @@ Template.prototype.create = function() {
             }
         }
     });
-    fs.symlinkSync('.gitignore', '.jshintignore');
+
+    var jshintIgnorePath = join(self.dest, '.jshintignore');
+
+    if (!fs.existsSync(jshintIgnorePath)) {
+        fs.symlinkSync('.gitignore', jshintIgnorePath);
+    }
+
     self.logger.log();
 };
 
