@@ -152,6 +152,7 @@ Template.prototype.create = function() {
             }
         }
     });
+    fs.symlinkSync('.gitignore', '.jshintignore');
     self.logger.log();
 };
 
