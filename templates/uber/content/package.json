@@ -22,7 +22,7 @@
   },
   "scripts": {
     "test": "npm run jshint && istanbul --print=none cover test/index.js | tspec && istanbul report text",
-    "jshint": "jshint --verbose --exclude-path .gitignore .",
+    "jshint": "jshint --verbose .",
     "cover": "istanbul cover --report none --print detail test/index.js",
     "view-cover": "istanbul report html && open ./coverage/index.html"
   },
