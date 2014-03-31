@@ -37,7 +37,7 @@
     "jshint": "jshint --verbose --exclude-path .gitignore --exclude templates/uber/content ."
   },
   "bin": {
-    "uber-ngen": "./bin/ngen"
+    "uber-ngen": "./bin/ngen.js"
   },
   "devDependencies": {
     "pre-commit": "0.0.4",
