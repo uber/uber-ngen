@@ -2,32 +2,57 @@
 
 var fs = require('fs');
 var path = require('path');
-var argv = require('optimist').argv;
+var parseArgs = require('minimist');
+var template = require('string-template');
+var msee = require('msee');
+
 var Template = require('../index.js');
 
-// parse arguments
-if (argv.h || argv.help || argv._.length === 0) {
-    return fs.createReadStream(path.join(__dirname, 'usage.txt'))
-        .pipe(process.stdout);
+function printHelp(opts) {
+    opts = opts || {};
+
+    var loc = path.join(__dirname, 'usage.txt');
+    var content = fs.readFileSync(loc, 'utf8');
+
+    content = template(content, {
+        cmd: opts.cmd || 'uber-ngen'
+    });
+
+    return console.log(msee.parse(content, {
+        paragraphState: '\n'
+    }));
 }
 
-var template = argv.t || argv.template || 'uber';
-var templates = argv.d || argv.directory ||
-    path.join(__dirname, '..', 'templates');
-var dest = argv._[0];
-var description = argv._[1];
-
-// create template
-var tmpl = new Template(template, {
-    templates: templates,
-    description: description,
-    logger: console
-});
-tmpl.init(dest, function (err) {
-    if (err) {
-        console.error(err.message);
-        return process.exit(1);
+function main(opts) {
+    // parse arguments
+    if (opts.h || opts.help || opts._.length === 0) {
+        return printHelp(opts);
     }
 
-    process.stdin.destroy();
-});
+    var template = opts.t || opts.template || 'uber';
+    var templates = opts.d || opts.directory ||
+        path.join(__dirname, '..', 'templates');
+    var dest = opts._[0];
+    var description = opts._[1];
+
+    // create template
+    var tmpl = new Template(template, {
+        templates: templates,
+        description: description,
+        logger: console
+    });
+    tmpl.init(dest, function (err) {
+        if (err) {
+            console.error(err.message);
+            return process.exit(1);
+        }
+
+        process.stdin.destroy();
+    });
+}
+
+module.exports = main;
+
+if (require.main === module) {
+    main(parseArgs(process.argv.slice(2)));
+}
