@@ -19,7 +19,7 @@ function printHelp(opts) {
     });
 
     return console.log(msee.parse(content, {
-        paragraphState: '\n'
+        paragraphStart: '\n'
     }));
 }
 
@@ -32,8 +32,8 @@ function main(opts) {
     var template = opts.t || opts.template || 'uber';
     var templates = opts.d || opts.directory ||
         path.join(__dirname, '..', 'templates');
-    var dest = opts._[0];
-    var description = opts._[1];
+    var dest = opts.name || opts._[0];
+    var description = opts.description || opts._[1];
 
     // create template
     var tmpl = new Template(template, {

@@ -1,11 +1,22 @@
+# `{cmd} [name] [description] [options]`
 
-Usage: uber-ngen [name] [description]
+Creates a new project. Will write the project to a folder called
+  `name` in the current working directory.
 
-    name is the name of the module & also the path to place it in
-    description is optionally the description for the module
+Example:
 
-    Options:
-        -t, --template <name>   Use the template <name>
-        -d, --directory <path>  Use the template directory <path>
-        -V, --version           Output the current version
-        -h, --help              Display help information'
+`{cmd} new-project 'new description of project'`
+
+Options:
+    --template=[str]        Which template to use
+    --directory=[str]       Which directory templates live in.
+    --name=[str]            Set name of project
+    --description=[str]     Set description of project
+
+ - `--template` defaults to `uber`
+ - `--directory` defaults to `uber-ngen/templates` folder
+
+
+## `{cmd} --help`
+
+Prints this message
