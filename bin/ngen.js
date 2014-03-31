@@ -11,7 +11,7 @@ var Template = require('../index.js');
 function printHelp(opts) {
     opts = opts || {};
 
-    var loc = path.join(__dirname, 'usage.txt');
+    var loc = path.join(__dirname, 'usage.md');
     var content = fs.readFileSync(loc, 'utf8');
 
     content = template(content, {
