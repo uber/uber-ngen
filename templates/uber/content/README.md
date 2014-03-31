@@ -1,14 +1,14 @@
 # {{project}}
 
 <!--
-    [![build status][1]][2]
-    [![Coverage Status][5]][6]
-    [![Davis Dependency status][9]][10]
+    [![build status][build-png]][build]
+    [![Coverage Status][cover-png]][cover]
+    [![Davis Dependency status][dep-png]][dep]
 -->
 
-<!-- [![NPM][13]][14] -->
+<!-- [![NPM][npm-png]][npm] -->
 
-<!-- [![browser support][11]][12] -->
+<!-- [![browser support][test-png]][test] -->
 
 {{description}}
 
@@ -34,13 +34,13 @@ var {{projectName}} = require("{{project}}");
 
 ## MIT Licenced
 
-  [1]: https://secure.travis-ci.org/{{name}}/{{project}}.png
-  [2]: https://travis-ci.org/{{name}}/{{project}}
-  [5]: https://coveralls.io/repos/{{name}}/{{project}}/badge.png
-  [6]: https://coveralls.io/r/{{name}}/{{project}}
-  [9]: https://david-dm.org/{{name}}/{{project}}.png
-  [10]: https://david-dm.org/{{name}}/{{project}}
-  [11]: https://ci.testling.com/{{name}}/{{project}}.png
-  [12]: https://ci.testling.com/{{name}}/{{project}}
-  [13]: https://nodei.co/npm/{{project}}.png?stars&downloads
-  [14]: https://nodei.co/npm/{{project}}
+  [build-png]: https://secure.travis-ci.org/{{name}}/{{project}}.png
+  [build]: https://travis-ci.org/{{name}}/{{project}}
+  [cover-png]: https://coveralls.io/repos/{{name}}/{{project}}/badge.png
+  [cover]: https://coveralls.io/r/{{name}}/{{project}}
+  [dep-png]: https://david-dm.org/{{name}}/{{project}}.png
+  [dep]: https://david-dm.org/{{name}}/{{project}}
+  [npm-png]: https://ci.testling.com/{{name}}/{{project}}.png
+  [npm]: https://ci.testling.com/{{name}}/{{project}}
+  [test-png]: https://nodei.co/npm/{{project}}.png?stars&downloads
+  [test]: https://nodei.co/npm/{{project}}
