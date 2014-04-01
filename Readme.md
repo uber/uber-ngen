@@ -25,12 +25,14 @@ Run `uber-ngen {{name}} {{description}}` and fill in no fields.
 ```
 Usage: uber-ngen [name] [description]
 
-Options:
+    name is the name of the module & also the path to place it in
+    description is optionally the description for the module
 
-  -t, --template <name>   Use the template <name>
-  -d, --directory <path>  Use the template directory <path>
-  -V, --version           Output the current version
-  -h, --help              Display help information
+    Options:
+        -t, --template <name>   Use the template <name>
+        -d, --directory <path>  Use the template directory <path>
+        -V, --version           Output the current version
+        -h, --help              Display help information'
 ```
 
 
@@ -38,8 +40,9 @@ Options:
 
 ### Uber
 
-Currently the only available template, creating the following structure
- populated with content after the following questions are asked from the cli:
+Currently the only available template, creating the following 
+  structure populated with content after the following questions 
+  are asked from the cli:
 
      Project Name: rt-uncaught-exception
      Project description: Our default uncaught exception handler
@@ -53,6 +56,7 @@ structure:
      ./jshint.json
      ./package.json
      ./README.md
+     ./LICENSE
 
 ## Docs
 
