@@ -13,8 +13,8 @@ Options:
     --name=[str]            Set name of project
     --description=[str]     Set description of project
 
- - `--template` defaults to `uber`
- - `--directory` defaults to `uber-ngen/templates` folder
+ - `--template` defaults to `{template}`
+ - `--directory` defaults to `{directoryName}` folder
 
 
 ## `{cmd} --help`
