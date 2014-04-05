@@ -15,7 +15,9 @@ function printHelp(opts) {
     var content = fs.readFileSync(loc, 'utf8');
 
     content = template(content, {
-        cmd: opts.cmd || 'uber-ngen'
+        cmd: opts.cmd || 'uber-ngen',
+        template: opts.template || 'uber',
+        directoryName: opts.directoryName || 'uber-ngen/templates'
     });
 
     return console.log(msee.parse(content, {
