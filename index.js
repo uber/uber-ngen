@@ -2,6 +2,7 @@ var fs = require('fs');
 var join = require('path').join;
 var prompt = require('promptly').prompt;
 var chalk = require('chalk');
+var extend = require('xtend');
 
 function noop() {}
 
@@ -26,9 +27,9 @@ function Template(name, opts) {
     this.path = join(this.templates, name);
     this.contentPath = this.path + '/content';
     this.mod = require(this.path);
-    this.values = {
+    this.values = extend(opts, {
         year: new Date().getFullYear()
-    };
+    });
     this.directories = {};
 }
 
@@ -45,7 +46,6 @@ Template.prototype.init = function(dest, callback) {
     var keys = Object.keys(vars);
 
     self.values.project = dest;
-    self.values.description = self.description;
     self.dest = dest;
     // print new line for pretties.
     self.logger.log();

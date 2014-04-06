@@ -27,23 +27,21 @@ function printHelp(opts) {
 
 function main(opts) {
     // parse arguments
-    if (opts.h || opts.help || opts._.length === 0) {
+    if (opts.h || opts.help) {
         return printHelp(opts);
     }
 
-    var template = opts.t || opts.template || 'uber';
-    var templates = opts.d || opts.directory ||
+    opts.template = opts.t || opts.template || 'uber';
+    opts.templates = opts.d || opts.directory ||
         path.join(__dirname, '..', 'templates');
-    var dest = opts.name || opts._[0];
-    var description = opts.description || opts._[1];
+    opts.name = opts.name || opts._[0];
+    opts.description = opts.description || opts._[1];
+
+    opts.logger = console;
 
     // create template
-    var tmpl = new Template(template, {
-        templates: templates,
-        description: description,
-        logger: console
-    });
-    tmpl.init(dest, function (err) {
+    var tmpl = new Template(opts.template, opts);
+    tmpl.init(opts.name, function (err) {
         if (err) {
             console.error(err.message);
             return process.exit(1);
