@@ -63,7 +63,7 @@ Template.prototype.init = function(dest, callback) {
             parseLocal();
         }
 
-        if (key && !self.values[key]) {
+        if (key) {
             desc = vars[key];
             if ('function' === typeof desc) {
                 desc(self.values, done);
