@@ -30,17 +30,17 @@ var {{projectName}} = require("{{project}}");
 
 ## Contributors
 
- - {{name}}
+ - {{gitName}}
 
 ## MIT Licenced
 
-  [build-png]: https://secure.travis-ci.org/{{name}}/{{project}}.png
-  [build]: https://travis-ci.org/{{name}}/{{project}}
-  [cover-png]: https://coveralls.io/repos/{{name}}/{{project}}/badge.png
-  [cover]: https://coveralls.io/r/{{name}}/{{project}}
-  [dep-png]: https://david-dm.org/{{name}}/{{project}}.png
-  [dep]: https://david-dm.org/{{name}}/{{project}}
-  [npm-png]: https://ci.testling.com/{{name}}/{{project}}.png
-  [npm]: https://ci.testling.com/{{name}}/{{project}}
+  [build-png]: https://secure.travis-ci.org/{{gitName}}/{{project}}.png
+  [build]: https://travis-ci.org/{{gitName}}/{{project}}
+  [cover-png]: https://coveralls.io/repos/{{gitName}}/{{project}}/badge.png
+  [cover]: https://coveralls.io/r/{{gitName}}/{{project}}
+  [dep-png]: https://david-dm.org/{{gitName}}/{{project}}.png
+  [dep]: https://david-dm.org/{{gitName}}/{{project}}
+  [npm-png]: https://ci.testling.com/{{gitName}}/{{project}}.png
+  [npm]: https://ci.testling.com/{{gitName}}/{{project}}
   [test-png]: https://nodei.co/npm/{{project}}.png?stars&downloads
   [test]: https://nodei.co/npm/{{project}}

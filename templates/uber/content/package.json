@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "{{description}}",
   "keywords": [],
-  "author": "{{name}} <{{email}}>",
+  "author": "{{gitName}} <{{email}}>",
   "repository": "git://github.com/uber/{{project}}.git",
   "main": "index",
   "homepage": "https://github.com/uber/{{project}}",
@@ -22,7 +22,7 @@
   },
   "licenses": [{
     "type": "MIT",
-    "url": "http://github.com/{{name}}/{{project}}/raw/master/LICENSE"
+    "url": "http://github.com/uber/{{project}}/raw/master/LICENSE"
   }],
   "scripts": {
     "test": "npm run jshint && istanbul --print=none cover test/index.js | tspec && istanbul report text",

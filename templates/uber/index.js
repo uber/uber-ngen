@@ -38,7 +38,7 @@ module.exports = {
         callback(null, version);
     },
     description: 'Project description: ',
-    name: fetchFromGitConfig('user.name'),
+    gitName: fetchFromGitConfig('user.name'),
     email: fetchFromGitConfig('user.email'),
     projectName: function readProjectName(values, callback) {
         callback(null, camelize(values.project));
