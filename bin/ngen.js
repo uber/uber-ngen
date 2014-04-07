@@ -17,6 +17,8 @@ function printHelp(opts) {
     content = template(content, {
         cmd: opts.cmd || 'uber-ngen',
         template: opts.template || 'uber',
+        options: opts.usageOptions || '',
+        defaults: opts.usageDefaults || '',
         directoryName: opts.directoryName || 'uber-ngen/templates'
     });
 

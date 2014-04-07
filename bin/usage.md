@@ -12,10 +12,11 @@ Options:
     --directory=[str]       Which directory templates live in.
     --name=[str]            Set name of project
     --description=[str]     Set description of project
+{options}
 
  - `--template` defaults to `{template}`
  - `--directory` defaults to `{directoryName}` folder
-
+{defaults}
 
 ## `{cmd} --help`
 
