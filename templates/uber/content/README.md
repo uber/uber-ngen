@@ -24,6 +24,10 @@ var {{projectName}} = require("{{project}}");
 
 ### `var someValue = {{projectName}}(/*arguments*/)`
 
+<!--
+  This is a jsig notation of your interface.
+  https://github.com/Raynos/jsig
+-->
 ```ocaml
 {{project}} := (arg: Any) => void
 ```
