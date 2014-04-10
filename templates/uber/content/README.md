@@ -20,6 +20,16 @@ var {{projectName}} = require("{{project}}");
 // TODO. Show example
 ```
 
+## Docs
+
+### `var someValue = {{projectName}}(/*arguments*/)`
+
+```ocaml
+{{project}} := (arg: Any) => void
+```
+
+// TODO. State what the module does.
+
 ## Installation
 
 `npm install {{project}}`
