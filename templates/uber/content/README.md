@@ -20,6 +20,20 @@ var {{projectName}} = require("{{project}}");
 // TODO. Show example
 ```
 
+## Docs
+
+### `var someValue = {{projectName}}(/*arguments*/)`
+
+<!--
+  This is a jsig notation of your interface.
+  https://github.com/Raynos/jsig
+-->
+```ocaml
+{{project}} := (arg: Any) => void
+```
+
+// TODO. State what the module does.
+
 ## Installation
 
 `npm install {{project}}`
