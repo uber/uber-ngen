@@ -48,13 +48,13 @@ var {{projectName}} = require("{{project}}");
 
 ## MIT Licenced
 
-  [build-png]: https://secure.travis-ci.org/{{gitName}}/{{project}}.png
-  [build]: https://travis-ci.org/{{gitName}}/{{project}}
-  [cover-png]: https://coveralls.io/repos/{{gitName}}/{{project}}/badge.png
-  [cover]: https://coveralls.io/r/{{gitName}}/{{project}}
-  [dep-png]: https://david-dm.org/{{gitName}}/{{project}}.png
-  [dep]: https://david-dm.org/{{gitName}}/{{project}}
-  [npm-png]: https://ci.testling.com/{{gitName}}/{{project}}.png
-  [npm]: https://ci.testling.com/{{gitName}}/{{project}}
-  [test-png]: https://nodei.co/npm/{{project}}.png?stars&downloads
-  [test]: https://nodei.co/npm/{{project}}
+  [build-png]: https://secure.travis-ci.org/uber/{{project}}.png
+  [build]: https://travis-ci.org/uber/{{project}}
+  [cover-png]: https://coveralls.io/repos/uber/{{project}}/badge.png
+  [cover]: https://coveralls.io/r/uber/{{project}}
+  [dep-png]: https://david-dm.org/uber/{{project}}.png
+  [dep]: https://david-dm.org/uber/{{project}}
+  [test-png]: https://ci.testling.com/uber/{{project}}.png
+  [tes]: https://ci.testling.com/uber/{{project}}
+  [npm-png]: https://nodei.co/npm/{{project}}.png?stars&downloads
+  [npm]: https://nodei.co/npm/{{project}}
