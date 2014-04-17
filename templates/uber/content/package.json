@@ -26,7 +26,7 @@
     "url": "http://github.com/uber/{{project}}/raw/master/LICENSE"
   }],
   "scripts": {
-    "test": "npm run jshint --silent && npm run unit-test --silent",
+    "test": "npm run jshint -s && NODE_ENV=test node test/index.js | tap-spec",
     "unit-test": "NODE_ENV=test node test/index.js | tap-spec",
     "jshint-pre-commit": "jshint --verbose $(git diff --cached --name-only | grep '\\.js$')",
     "jshint": "jshint --verbose .",
