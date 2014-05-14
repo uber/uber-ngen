@@ -1,7 +1,6 @@
 var fs = require('fs');
 var join = require('path').join;
 var prompt = require('promptly').prompt;
-var chalk = require('chalk');
 var extend = require('xtend');
 
 function noop() {}
@@ -68,7 +67,7 @@ Template.prototype.init = function(dest, callback) {
             if ('function' === typeof desc) {
                 desc(self.values, done);
             } else {
-                prompt(chalk.gray('  ' + desc.trim()), done);
+                prompt('  ' + desc.trim(), done);
             }
         } else if (key === undefined) {
             if (!self.dest) {
@@ -135,9 +134,7 @@ Template.prototype.create = function() {
         if (self.directories[file]) {
             try {
                 fs.mkdirSync(out, 0775);
-                self.logger.log(
-                    chalk.gray('  create :'),
-                    chalk.cyan(out));
+                self.logger.log('  create :', out);
             } catch (err) {
                 // ignore
             }
@@ -146,9 +143,7 @@ Template.prototype.create = function() {
             if (!fs.existsSync(out)) {
                 var str = self.parse(fs.readFileSync(file, 'utf8'));
                 fs.writeFileSync(out, str);
-                self.logger.log(
-                    chalk.gray('  create :'),
-                    chalk.cyan(out));
+                self.logger.log('  create :', out);
             }
         }
     });
