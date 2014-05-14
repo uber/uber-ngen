@@ -29,7 +29,7 @@
     "test": "npm run jshint -s && NODE_ENV=test node test/index.js | tap-spec",
     "unit-test": "NODE_ENV=test node test/index.js | tap-spec",
     "jshint-pre-commit": "jshint --verbose $(git diff --cached --name-only | grep '\\.js$')",
-    "jshint": "jshint --verbose .",
+    "jshint": "jshint --verbose $(git ls-files | grep '\\.js$')",
     "cover": "istanbul cover --report none --print detail test/index.js",
     "view-cover": "istanbul report html && open ./coverage/index.html",
     "travis": "npm run cover -s && istanbul report lcov && ((cat coverage/lcov.info | coveralls) || exit 0)"
