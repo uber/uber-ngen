@@ -34,7 +34,6 @@ Currently the only available template, creating the following
 structure:
  
      ./test/index.js
-     ./.jshintignore
      ./.gitignore
      ./.jshintrc
      ./index.js
