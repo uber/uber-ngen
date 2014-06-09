@@ -29,6 +29,7 @@ function Template(name, opts) {
     this.values = extend(opts, {
         year: new Date().getFullYear()
     });
+    this.extend = opts.extend;
     this.directories = {};
 }
 
@@ -149,6 +150,28 @@ Template.prototype.create = function() {
             if (!fs.existsSync(out)) {
                 var str = self.parse(fs.readFileSync(file, 'utf8'));
                 fs.writeFileSync(out, str);
+                if (written === false) {
+                    self.logger.log();
+                    written = true;
+                }
+                self.logger.log('  create :', out);
+            } else if (self.extend && (
+                out.substr(-5) === '.json' ||
+                path.basename(out) === '.jshintrc'
+            )) {
+                var srcBuf = fs.readFileSync(out, 'utf8');
+                var destBuf = self.parse(fs.readFileSync(file, 'utf8'));
+
+                if (srcBuf === destBuf) {
+                    return;
+                }
+
+                var srcJSON = JSON.parse(srcBuf);
+                var destJSON = JSON.parse(destBuf);
+
+                var targetJSON = extend(srcJSON, destJSON);
+                var targetBuf = JSON.stringify(targetJSON, null, '  ');
+                fs.writeFileSync(out, targetBuf);
                 if (written === false) {
                     self.logger.log();
                     written = true;
