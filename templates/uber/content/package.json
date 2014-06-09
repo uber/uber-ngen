@@ -19,19 +19,20 @@
     "istanbul": "^0.2.7",
     "tap-spec": "^0.1.8",
     "pre-commit": "0.0.5",
-    "coveralls": "^2.10.0"
+    "coveralls": "^2.10.0",
+    "opn": "^0.1.2"
   },
   "licenses": [{
     "type": "MIT",
     "url": "http://github.com/uber/{{project}}/raw/master/LICENSE"
   }],
   "scripts": {
-    "test": "npm run jshint -s && NODE_ENV=test node test/index.js | tap-spec",
-    "unit-test": "NODE_ENV=test node test/index.js | tap-spec",
+    "test": "npm run jshint -s && node test/index.js | tap-spec",
+    "unit-test": "node test/index.js | tap-spec",
     "jshint-pre-commit": "jshint --verbose $(git diff --cached --name-only | grep '\\.js$')",
     "jshint": "jshint --verbose $(git ls-files | grep '\\.js$')",
     "cover": "istanbul cover --report none --print detail test/index.js",
-    "view-cover": "istanbul report html && open ./coverage/index.html",
+    "view-cover": "istanbul report html && opn ./coverage/index.html",
     "travis": "npm run cover -s && istanbul report lcov && ((cat coverage/lcov.info | coveralls) || exit 0)"
   },
   "engine": {
