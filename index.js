@@ -1,5 +1,5 @@
 var fs = require('fs');
-var join = require('path').join;
+var path = require('path');
 var prompt = require('promptly').prompt;
 var extend = require('xtend');
 
@@ -23,7 +23,7 @@ function Template(name, opts) {
     this.logger = opts.logger || {
         log: noop
     };
-    this.path = join(this.templates, name);
+    this.path = path.join(this.templates, name);
     this.contentPath = this.path + '/content';
     this.mod = require(this.path);
     this.values = extend(opts, {
@@ -131,7 +131,8 @@ Template.prototype.create = function() {
     var written = false;
     self.files().forEach(function(file){
         var uri = self.parse(file);
-        var out = join(self.dest, uri.replace(self.contentPath, ''));
+        var out = path.join(self.dest,
+            uri.replace(self.contentPath, ''));
 
         out = out.replace("dotgitignore", ".gitignore");
 
