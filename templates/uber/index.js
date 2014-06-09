@@ -1,4 +1,7 @@
 var spawn = require('child_process').spawn;
+var path = require('path');
+var fs = require('fs');
+var prompt = require('promptly').prompt;
 var camelize = require('camelize');
 var format = require('util').format;
 
@@ -37,7 +40,24 @@ module.exports = {
     version: function (values, callback) {
         callback(null, version);
     },
-    description: 'Project description: ',
+    description: function (values, callback) {
+        var pkg = path.join(values.project, 'package.json');
+
+        fs.readFile(pkg, function (err, buf) {
+            if (err) return promptFor();
+
+            var json = JSON.parse(String(buf));
+            if (!json.description) {
+                return promptFor();
+            }
+
+            callback(null, json.description);
+        });
+
+        function promptFor() {
+            prompt('  Project description: ', callback);
+        }
+    },
     gitName: fetchFromGitConfig('user.name'),
     email: fetchFromGitConfig('user.email'),
     projectName: function readProjectName(values, callback) {
