@@ -73,6 +73,11 @@ Template.prototype.init = function(dest, callback) {
             if (!self.dest) {
                 self.dest = self.values.project;
             }
+            self.variables = Object.keys(vars)
+                .reduce(function (acc, key) {
+                    acc[key] = self.values[key];
+                    return acc;
+                }, {});
             self.create();
             if (callback) callback();
         } else {
@@ -123,7 +128,7 @@ Template.prototype.create = function() {
         // ignore
     }
 
-    self.logger.log();
+    var written = false;
     self.files().forEach(function(file){
         var uri = self.parse(file);
         var out = join(self.dest, uri.replace(self.contentPath, ''));
@@ -143,12 +148,20 @@ Template.prototype.create = function() {
             if (!fs.existsSync(out)) {
                 var str = self.parse(fs.readFileSync(file, 'utf8'));
                 fs.writeFileSync(out, str);
+                if (written === false) {
+                    self.logger.log();
+                    written = true;
+                }
                 self.logger.log('  create :', out);
             }
         }
     });
 
-    self.logger.log();
+    if (written) {
+        self.logger.log();
+    }
+    self.logger.log('finished generating',
+        self.dest, '\n', self.variables);
 };
 
 /**
