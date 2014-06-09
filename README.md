@@ -57,6 +57,31 @@ t.init('target location to write on disk', function (err) {
 })
 ```
 
+### Extend semantics
+
+You can pass an `extend` boolean to `Template` i.e.
+
+``js
+var t = Template(name, { extend: true })
+```
+
+Or 
+
+```sh
+uber-ngen --extend=true
+```
+
+When you set `extend` to true the scaffolder will overwrite 
+  JSON files by reading the current file on disk and extending
+  it with the scaffold and writing that.
+
+This means any keys set in the scaffolder will overwrite keys
+  that are currently on disk in the folder.
+
+The scaffolder will not touch or change any other existing
+  files in the target folder and add any non-existing files to
+  the target folder
+
 ## MIT Licenced
 
   [usage]: https://github.com/uber/uber-ngen/tree/master/bin/usage.md
