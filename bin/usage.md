@@ -12,6 +12,7 @@ Options:
     --directory=[str]       Which directory templates live in.
     --name=[str]            Set name of project
     --description=[str]     Set description of project
+    --update-json           extend files in target folder
 {options}
 
  - `--template` defaults to `{template}`

@@ -1,5 +1,5 @@
 var fs = require('fs');
-var join = require('path').join;
+var path = require('path');
 var prompt = require('promptly').prompt;
 var extend = require('xtend');
 
@@ -23,12 +23,13 @@ function Template(name, opts) {
     this.logger = opts.logger || {
         log: noop
     };
-    this.path = join(this.templates, name);
+    this.path = path.join(this.templates, name);
     this.contentPath = this.path + '/content';
     this.mod = require(this.path);
     this.values = extend(opts, {
         year: new Date().getFullYear()
     });
+    this.updateJSON = opts['update-json'];
     this.directories = {};
 }
 
@@ -73,6 +74,11 @@ Template.prototype.init = function(dest, callback) {
             if (!self.dest) {
                 self.dest = self.values.project;
             }
+            self.variables = Object.keys(vars)
+                .reduce(function (acc, key) {
+                    acc[key] = self.values[key];
+                    return acc;
+                }, {});
             self.create();
             if (callback) callback();
         } else {
@@ -123,10 +129,11 @@ Template.prototype.create = function() {
         // ignore
     }
 
-    self.logger.log();
+    var written = false;
     self.files().forEach(function(file){
         var uri = self.parse(file);
-        var out = join(self.dest, uri.replace(self.contentPath, ''));
+        var out = path.join(self.dest,
+            uri.replace(self.contentPath, ''));
 
         out = out.replace("dotgitignore", ".gitignore");
 
@@ -143,12 +150,42 @@ Template.prototype.create = function() {
             if (!fs.existsSync(out)) {
                 var str = self.parse(fs.readFileSync(file, 'utf8'));
                 fs.writeFileSync(out, str);
+                if (written === false) {
+                    self.logger.log();
+                    written = true;
+                }
+                self.logger.log('  create :', out);
+            } else if (self.updateJSON && (
+                out.substr(-5) === '.json' ||
+                path.basename(out) === '.jshintrc'
+            )) {
+                var srcBuf = fs.readFileSync(out, 'utf8');
+                var destBuf = self.parse(fs.readFileSync(file, 'utf8'));
+
+                if (srcBuf === destBuf) {
+                    return;
+                }
+
+                var srcJSON = JSON.parse(srcBuf);
+                var destJSON = JSON.parse(destBuf);
+
+                var targetJSON = extend(srcJSON, destJSON);
+                var targetBuf = JSON.stringify(targetJSON, null, '  ');
+                fs.writeFileSync(out, targetBuf);
+                if (written === false) {
+                    self.logger.log();
+                    written = true;
+                }
                 self.logger.log('  create :', out);
             }
         }
     });
 
-    self.logger.log();
+    if (written) {
+        self.logger.log();
+    }
+    self.logger.log('finished generating',
+        self.dest, '\n', self.variables);
 };
 
 /**

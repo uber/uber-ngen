@@ -57,6 +57,35 @@ t.init('target location to write on disk', function (err) {
 })
 ```
 
+### update JSON
+
+You can pass an `update-json` boolean to `Template` i.e.
+
+```js
+var t = Template(name, { "update-json": true })
+```
+
+Or 
+
+```sh
+uber-ngen --update-json=true
+```
+
+Normally the scaffolder will not overwrite existing files in
+  the destination folder.
+
+If you set `--update-json` to true, the scaffolder will 
+  overwrite existing JSON files in the destination folder.
+
+The way it overwrites is by merging the new version of the JSON
+  file from the scaffolder into the destination folder.
+
+It is not recommended you commit these new JSON files, the 
+  scaffolder will probably have overwritten or deleted JSON
+  fields you wanted to keep. It's recommended you use
+  `git add -p` to cherry pick the new changes you want from the
+  scaffolder.
+
 ## MIT Licenced
 
   [usage]: https://github.com/uber/uber-ngen/tree/master/bin/usage.md
