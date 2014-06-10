@@ -57,30 +57,34 @@ t.init('target location to write on disk', function (err) {
 })
 ```
 
-### Extend semantics
+### update JSON
 
-You can pass an `extend` boolean to `Template` i.e.
+You can pass an `update-json` boolean to `Template` i.e.
 
-``js
-var t = Template(name, { extend: true })
+```js
+var t = Template(name, { "update-json": true })
 ```
 
 Or 
 
 ```sh
-uber-ngen --extend=true
+uber-ngen --update-json=true
 ```
 
-When you set `extend` to true the scaffolder will overwrite 
-  JSON files by reading the current file on disk and extending
-  it with the scaffold and writing that.
+Normally the scaffolder will not overwrite existing files in
+  the destination folder.
 
-This means any keys set in the scaffolder will overwrite keys
-  that are currently on disk in the folder.
+If you set `--update-json` to true, the scaffolder will 
+  overwrite existing JSON files in the destination folder.
 
-The scaffolder will not touch or change any other existing
-  files in the target folder and add any non-existing files to
-  the target folder
+The way it overwrites is by merging the new version of the JSON
+  file from the scaffolder into the destination folder.
+
+It is not recommended you commit these new JSON files, the 
+  scaffolder will probably have overwritten or deleted JSON
+  fields you wanted to keep. It's recommended you use
+  `git add -p` to cherry pick the new changes you want from the
+  scaffolder.
 
 ## MIT Licenced
 

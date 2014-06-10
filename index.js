@@ -29,7 +29,7 @@ function Template(name, opts) {
     this.values = extend(opts, {
         year: new Date().getFullYear()
     });
-    this.extend = opts.extend;
+    this.updateJSON = opts['update-json'];
     this.directories = {};
 }
 
@@ -155,7 +155,7 @@ Template.prototype.create = function() {
                     written = true;
                 }
                 self.logger.log('  create :', out);
-            } else if (self.extend && (
+            } else if (self.updateJSON && (
                 out.substr(-5) === '.json' ||
                 path.basename(out) === '.jshintrc'
             )) {
