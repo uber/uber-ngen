@@ -27,10 +27,11 @@ function printHelp(opts) {
     }));
 }
 
-function main(opts) {
+function main(opts, callback) {
     // parse arguments
     if (opts.h || opts.help) {
-        return printHelp(opts);
+        printHelp(opts);
+        return callback();
     }
 
     opts.template = opts.t || opts.template || 'uber';
@@ -43,7 +44,13 @@ function main(opts) {
 
     // create template
     var tmpl = new Template(opts.template, opts);
-    tmpl.init(opts.name, function (err) {
+    tmpl.init(opts.name, callback);
+}
+
+module.exports = main;
+
+if (require.main === module) {
+    main(parseArgs(process.argv.slice(2)), function (err) {
         if (err) {
             console.error(err.message);
             return process.exit(1);
@@ -51,10 +58,4 @@ function main(opts) {
 
         process.stdin.destroy();
     });
-}
-
-module.exports = main;
-
-if (require.main === module) {
-    main(parseArgs(process.argv.slice(2)));
 }
