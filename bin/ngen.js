@@ -44,7 +44,7 @@ function main(opts, callback) {
     opts.name = opts.name || opts._[0];
     opts.description = opts.description || opts._[1];
 
-    opts.logger = console;
+    opts.logger = opts.logger || console;
 
     // create template
     var tmpl = new Template(opts.template, opts);
