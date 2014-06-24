@@ -8,6 +8,8 @@ var msee = require('msee');
 
 var Template = require('../index.js');
 
+module.exports = main;
+
 function printHelp(opts) {
     opts = opts || {};
 
@@ -28,6 +30,8 @@ function printHelp(opts) {
 }
 
 function main(opts, callback) {
+    callback = callback || defaultCallback;
+
     // parse arguments
     if (opts.h || opts.help) {
         printHelp(opts);
@@ -47,15 +51,15 @@ function main(opts, callback) {
     tmpl.init(opts.name, callback);
 }
 
-module.exports = main;
+function defaultCallback(err) {
+    if (err) {
+        console.error(err.message);
+        return process.exit(1);
+    }
+
+    process.stdin.destroy();
+}
 
 if (require.main === module) {
-    main(parseArgs(process.argv.slice(2)), function (err) {
-        if (err) {
-            console.error(err.message);
-            return process.exit(1);
-        }
-
-        process.stdin.destroy();
-    });
+    main(parseArgs(process.argv.slice(2)), defaultCallback);
 }
