@@ -20,6 +20,7 @@ function Template(name, opts) {
     this.templates = opts.templates;
     this.description = opts.description;
     this.name = name;
+    this.dirname = opts.dirname || process.cwd();
     this.logger = opts.logger || {
         log: noop
     };
@@ -46,7 +47,7 @@ Template.prototype.init = function(dest, callback) {
     var keys = Object.keys(vars);
 
     self.values.project = dest;
-    self.dest = dest;
+    self.dest = path.join(this.dirname, dest);
     // print new line for pretties.
     self.logger.log();
 
@@ -72,7 +73,8 @@ Template.prototype.init = function(dest, callback) {
             }
         } else if (key === undefined) {
             if (!self.dest) {
-                self.dest = self.values.project;
+                self.dest = path.join(self.dirname,
+                    self.values.project);
             }
             self.variables = Object.keys(vars)
                 .reduce(function (acc, key) {
