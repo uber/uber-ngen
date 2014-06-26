@@ -36,9 +36,9 @@ function main(opts, callback) {
         return callback();
     }
 
-    opts.template = opts.t || opts.template || 'uber';
-    opts.templates = opts.d || opts.directory ||
-        path.join(__dirname, '..', 'templates');
+    opts.template = opts.template;
+    opts.directory = opts.directory;
+
     opts.name = opts.name || opts._[0];
     opts.description = opts.description || opts._[1];
 
