@@ -15,9 +15,6 @@ Options:
     --update-json           extend files in target folder
 {options}
 
- - `--template` defaults to `{template}`
- - `--directory` defaults to `{directoryName}` folder
-{defaults}
 
 ## `{cmd} --help`
 
