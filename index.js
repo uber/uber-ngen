@@ -19,8 +19,8 @@ function Template(name, opts) {
 
     this.templates = opts.templates;
     this.description = opts.description;
-    this.name = name;
     this.dirname = opts.dirname || process.cwd();
+    this.name = opts.name;
     this.logger = opts.logger || {
         log: noop
     };
@@ -42,9 +42,16 @@ function Template(name, opts) {
  */
 
 Template.prototype.init = function(dest, callback) {
+    if (typeof dest === 'function') {
+        callback = dest;
+        dest = null;
+    }
+
     var self = this;
     var vars = self.mod;
     var keys = Object.keys(vars);
+
+    dest = dest || self.name;
 
     self.values.project = dest;
     self.dest = path.join(this.dirname, dest);

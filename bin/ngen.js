@@ -47,7 +47,7 @@ function main(opts, callback) {
 
     // create template
     var tmpl = new Template(opts.template, opts);
-    tmpl.init(opts.name, callback);
+    tmpl.init(callback);
 }
 
 function defaultCallback(err) {
