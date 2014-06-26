@@ -12,19 +12,20 @@ function noop() {}
  * @api private
  */
 
-function Template(name, opts) {
+function Template(template, opts) {
     if (!(this instanceof Template)) {
-        return new Template(name, opts);
+        return new Template(template, opts);
     }
 
-    this.templates = opts.templates;
+    this.directory = opts.directory;
     this.description = opts.description;
     this.dirname = opts.dirname || process.cwd();
     this.name = opts.name;
+    this.template = template;
     this.logger = opts.logger || {
         log: noop
     };
-    this.path = path.join(this.templates, name);
+    this.path = path.join(this.directory, template);
     this.contentPath = this.path + '/content';
     this.mod = require(this.path);
     this.values = extend(opts, {
