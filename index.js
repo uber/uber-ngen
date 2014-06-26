@@ -5,34 +5,46 @@ var extend = require('xtend');
 
 function noop() {}
 
-/**
- * Initialize a new `Template` with the given `name`.
- *
- * @param {String} name
- * @api private
- */
+/*
 
-function Template(template, opts) {
+ - directory, the folder which contains templates
+ - template, the template name, which sub folder to use in
+    the templates folder.
+ - dirname, the directory to write the new scaffolded project
+    out to.
+ - updateJSON, whether or not to merge JSON based templates
+
+ - name, name of the new project
+ - description, description of the new project
+
+ - `this.path`, path to the template folder.
+ - `this.contentPath`, path to the content folder of a template
+ - `this.mod`, the module of template variables of a template
+ - `this.values`, the values to fill in the template placeholder
+
+*/
+function Template(opts) {
     if (!(this instanceof Template)) {
-        return new Template(template, opts);
+        return new Template(opts);
     }
 
     this.directory = opts.directory;
-    this.description = opts.description;
+    this.template = opts.template;
     this.dirname = opts.dirname || process.cwd();
+    this.updateJSON = opts.updateJSON;
+
     this.name = opts.name;
-    this.template = template;
+    this.description = opts.description;
+    
+    this.path = path.join(this.directory, opts.template);
+    this.contentPath = path.join(this.path, '/content');
+    this.mod = require(this.path);
+    this.values = extend(opts);
+
+    this.directories = {};
     this.logger = opts.logger || {
         log: noop
     };
-    this.path = path.join(this.directory, template);
-    this.contentPath = this.path + '/content';
-    this.mod = require(this.path);
-    this.values = extend(opts, {
-        year: new Date().getFullYear()
-    });
-    this.updateJSON = opts['update-json'];
-    this.directories = {};
 }
 
 /**
@@ -42,20 +54,13 @@ function Template(template, opts) {
  * @api private
  */
 
-Template.prototype.init = function(dest, callback) {
-    if (typeof dest === 'function') {
-        callback = dest;
-        dest = null;
-    }
-
+Template.prototype.init = function(callback) {
     var self = this;
     var vars = self.mod;
     var keys = Object.keys(vars);
 
-    dest = dest || self.name;
-
-    self.values.project = dest;
-    self.dest = path.join(this.dirname, dest);
+    self.values.project = self.name;
+    self.dest = path.join(this.dirname, self.name);
     // print new line for pretties.
     self.logger.log();
 

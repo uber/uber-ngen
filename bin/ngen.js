@@ -36,17 +36,25 @@ function main(opts, callback) {
         return callback();
     }
 
-    opts.template = opts.template;
-    opts.directory = opts.directory;
+    if (!opts.template) {
+        var error = new Error('--template is required');
+        return callback(error);
+    }
+
+    if (!opts.directory) {
+        var error2 = new Error('--directory is required');
+        return callback(error2);
+    }
 
     opts.name = opts.name || opts._[0];
     opts.description = opts.description || opts._[1];
     opts.dirname = opts.dirname || process.cwd();
+    opts.updateJSON = opts['update-json'] || opts.updateJSON;
 
     opts.logger = opts.logger || console;
 
     // create template
-    var tmpl = new Template(opts.template, opts);
+    var tmpl = new Template(opts);
     tmpl.init(callback);
 }
 
