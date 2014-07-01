@@ -19,6 +19,7 @@
   "trailing": true,
   "node": true,
   "noempty": true,
+  "shadow": "outer",
   "maxdepth": 4,
   "maxparams": 4,
   "globals": {
