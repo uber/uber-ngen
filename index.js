@@ -134,6 +134,7 @@ Template.prototype.create = function() {
         var uri = self.parse(file);
         var out = path.join(self.dest,
             uri.replace(self.contentPath, ''));
+        var stat;
 
         out = out.replace("dotgitignore", ".gitignore");
 
@@ -148,8 +149,11 @@ Template.prototype.create = function() {
         // file
         } else {
             if (!fs.existsSync(out)) {
+                stat = fs.statSync(file);
                 var str = self.parse(fs.readFileSync(file, 'utf8'));
-                fs.writeFileSync(out, str);
+                fs.writeFileSync(out, str, {
+                    mode: stat.mode
+                });
                 if (written === false) {
                     self.logger.log();
                     written = true;
@@ -159,6 +163,7 @@ Template.prototype.create = function() {
                 out.substr(-5) === '.json' ||
                 path.basename(out) === '.jshintrc'
             )) {
+                stat = fs.statSync(file);
                 var srcBuf = fs.readFileSync(out, 'utf8');
                 var destBuf = self.parse(fs.readFileSync(file, 'utf8'));
 
@@ -171,7 +176,9 @@ Template.prototype.create = function() {
 
                 var targetJSON = extend(srcJSON, destJSON);
                 var targetBuf = JSON.stringify(targetJSON, null, '  ');
-                fs.writeFileSync(out, targetBuf);
+                fs.writeFileSync(out, targetBuf, {
+                    mode: stat.mode
+                });
                 if (written === false) {
                     self.logger.log();
                     written = true;
