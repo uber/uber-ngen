@@ -60,6 +60,45 @@ Each one of the files should just have the default text that you
 Note that we can use `{{variableName}}` as template variables
   inside the files.
 
+### The top level `index.js`
+
+Adjacent to your `content` folder you want to specify an
+  `index.js`. The `index.js` will define all the variables
+  available in your `content` folder.
+
+For example:
+
+```js
+var package = require('../../package.json');
+
+module.exports = {
+    project: 'Project name: ',
+    version: function (values, callback) {
+        callback(null, version);
+    }
+};
+```
+
+Here we are saying that this template will have two variables
+  available in the `content` folder, namely `{{project}}` and
+  `{{version}}`.
+
+When you specify your variables they can be either a string or
+  a function.
+
+If the variable definition is a string then we 
+  will asynchronously prompt the user with the string and then
+  assign the user input on the CLI into that variable.
+
+If the variable defintion is a function then we will call your
+  function with all the current variable values we have and a
+  callback. You are then expected to eventually return us the
+  result.
+
+We will call your functions in property order on your
+  `module.exports`. So if one variable depends on another it's
+  recommended you list them in that order.
+
 
 ## Docs
 
