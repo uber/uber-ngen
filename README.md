@@ -73,8 +73,8 @@ var package = require('../../package.json');
 
 module.exports = {
     project: 'Project name: ',
-    version: function (values, callback) {
-        callback(null, version);
+    year: function (values, callback) {
+        callback(null, new Date().getFullYear())
     }
 };
 ```
@@ -150,7 +150,7 @@ It is not recommended you commit these new JSON files, the
 
 ## Installation
 
-`npm install rt-logger`
+`npm install uber-ngen`
 
 ## MIT Licenced
 
