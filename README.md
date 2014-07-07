@@ -69,8 +69,6 @@ Adjacent to your `content` folder you want to specify an
 For example:
 
 ```js
-var package = require('../../package.json');
-
 module.exports = {
     project: 'Project name: ',
     year: function (values, callback) {
