@@ -1,59 +1,119 @@
 # uber-ngen
 
-`uber-ngen` is a tool that will generate a new nodejs project
-  for you. It includes best practices around the structure of
-  your README and package.json
+`uber-ngen` is a scaffolding module used to scaffold out
+  any kind of project.
 
-## Usage
+## Creating a template for ngen
 
-`uber-ngen [name] [description] [flags]`
+`ngen` is a tool that creates the new files for your project.
 
-See [usage.md][usage] for more documentation
+You author an `ngen` template and you can then use `ngen` to 
+  create a new folder based on the template.
 
-## Example
+An `ngen` template is a folder with an `index.js` and a `content`
+  folder inside it. For example:
 
-You can use `uber-ngen` in three modes.
+```
+./my-template
+    content/*
+    index.js
+```
 
-Run `uber-ngen` and then fill in the two fields for name & description.
-Run `uber-ngen {{name}}` and then fill in the field for description
-Run `uber-ngen {{name}} {{description}}` and fill in no fields.
+### The `content` folder.
 
-`uber-ngen` will generate a folder that is called `{{name}}` in your CWD.
+One of the simplest content folders might look like
 
-## Templates
+```
+./content
+    index.js
+    README.md
+    package.json
+    test/
+        {{project}}.js
+```
 
-### Uber
+You basically specify what kind of files you want in a 
+  new project.
 
-Currently the only available template, creating the following 
-  structure populated with content after the following questions 
-  are asked from the cli:
+Note that the content of a template can contain nested folders
+  and that you can use template variables in the file names to
+  have dynamic file names.
 
-     Project Name: rt-uncaught-exception
-     Project description: Our default uncaught exception handler
+#### The `content` files
 
-structure:
- 
-     ./test/index.js
-     ./.gitignore
-     ./.jshintrc
-     ./index.js
-     ./package.json
-     ./README.md
-     ./LICENSE
+Each one of the files should just have the default text that you
+  would want in it. For example a package.json might look like:
+
+```json
+{
+    "name": "{{project}}",
+    "version": "1.0.0",
+    "scripts": {
+        "test": "node test/{{project}}.js"
+    },
+    "devDependencies": {
+        "tape": "^2.0.0"
+    }
+}
+```
+
+Note that we can use `{{variableName}}` as template variables
+  inside the files.
+
+### The top level `index.js`
+
+Adjacent to your `content` folder you want to specify an
+  `index.js`. The `index.js` will define all the variables
+  available in your `content` folder.
+
+For example:
+
+```js
+module.exports = {
+    project: 'Project name: ',
+    year: function (values, callback) {
+        callback(null, new Date().getFullYear())
+    }
+};
+```
+
+Here we are saying that this template will have two variables
+  available in the `content` folder, namely `{{project}}` and
+  `{{version}}`.
+
+When you specify your variables they can be either a string or
+  a function.
+
+If the variable definition is a string then we 
+  will asynchronously prompt the user with the string and then
+  assign the user input on the CLI into that variable.
+
+If the variable defintion is a function then we will call your
+  function with all the current variable values we have and a
+  callback. You are then expected to eventually return us the
+  result.
+
+We will call your functions in property order on your
+  `module.exports`. So if one variable depends on another it's
+  recommended you list them in that order.
+
 
 ## Docs
 
 `uber-ngen` can also be called directly
 
 ```js
-var Template = require('uber-ngen')
+var ngen = require('uber-ngen/bin/ngen.js')
 
-var t = Template('name-of-template', {
-  templates: 'folder location of templates'
-})
-t.init('target location to write on disk', function (err) {
-  // scaffolded the template to the location
-  // calling init() will prompt on STDIN.
+ngen({
+    directory: '/directory/to/template',
+    template: 'name-of-template',
+
+    name: 'name of new project'
+}, function (err) {
+    /* finished scaffolding. */
+
+    /* will write new project to `process.cwd()/{options.name}` */
 })
 ```
 
@@ -85,6 +145,10 @@ It is not recommended you commit these new JSON files, the
   fields you wanted to keep. It's recommended you use
   `git add -p` to cherry pick the new changes you want from the
   scaffolder.
+
+## Installation
+
+`npm install uber-ngen`
 
 ## MIT Licenced
 
