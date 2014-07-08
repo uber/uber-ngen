@@ -79,7 +79,7 @@ module.exports = {
 
 Here we are saying that this template will have two variables
   available in the `content` folder, namely `{{project}}` and
-  `{{version}}`.
+  `{{year}}`.
 
 When you specify your variables they can be either a string or
   a function.
