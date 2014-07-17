@@ -36,6 +36,7 @@ function Template(name, opts) {
     try {
         this.exclusions = require(this.path + '/exclude.js')(this.values);
     } catch(e) {
+        if (e.code !== 'MODULE_NOT_FOUND') { throw e; }
         this.exclusions = [];
     }
 }
