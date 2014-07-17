@@ -2,6 +2,7 @@ var fs = require('fs');
 var path = require('path');
 var prompt = require('promptly').prompt;
 var extend = require('xtend');
+var _ = require('underscore');
 
 function noop() {}
 
@@ -204,10 +205,10 @@ Template.prototype.create = function() {
 
 Template.prototype.parse = function(str){
     var self = this;
-    return str
-        .replace(/\{\{([^}]+)\}\}/g, function(_, key){
-            return self.values[key];
-        });
+    _.templateSettings = {
+        interpolate: /\{\{(.+?)\}\}/g
+    };
+    return _.template(str, self.values);
 };
 
 module.exports = Template;
