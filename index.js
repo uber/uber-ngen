@@ -26,12 +26,18 @@ function Template(name, opts) {
     };
     this.path = path.join(this.templates, name);
     this.contentPath = this.path + '/content';
-    this.mod = require(this.path);
+    this.mod = require(this.path + '/index.js');
     this.values = extend(opts, {
         year: new Date().getFullYear()
     });
     this.updateJSON = opts['update-json'];
     this.directories = {};
+    //TODO make this a bit less janky
+    try {
+        this.exclusions = require(this.path + '/exclude.js')(this.values);
+    } catch(e) {
+        this.exclusions = [];
+    }
 }
 
 /**
@@ -103,11 +109,13 @@ Template.prototype.files = function() {
 
     (function readdirs(dir) {
         fs.readdirSync(dir).forEach(function(file){
-            files.push(file = dir + '/' + file);
-            var stat = fs.statSync(file);
-            if (stat.isDirectory()) {
-                self.directories[file] = true;
-                readdirs(file);
+            if(self.exclusions.indexOf(file) === -1) {
+                files.push(file = dir + '/' + file);
+                var stat = fs.statSync(file);
+                if (stat.isDirectory()) {
+                    self.directories[file] = true;
+                    readdirs(file);
+                }
             }
         });
     })(self.contentPath);
