@@ -215,7 +215,8 @@ Template.prototype.create = function() {
 Template.prototype.parse = function(str){
     var self = this;
     _.templateSettings = {
-        interpolate: /\{\{(.+?)\}\}/g
+        interpolate: /\{\{(.+?)\}\}/g,
+        evaluate: /\{\%(.+?)\%\}/g
     };
     return _.template(str, self.values);
 };
