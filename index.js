@@ -67,7 +67,11 @@ Template.prototype.init = function(dest, callback) {
                 return callback(err);
             }
 
-            self.values[key] = String(value).trim();
+            if (typeof value === 'string') {
+                value = value.trim();
+            }
+
+            self.values[key] = value;
             parseLocal();
         }
 
