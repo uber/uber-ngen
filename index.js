@@ -218,11 +218,11 @@ Template.prototype.create = function() {
 
 Template.prototype.parse = function(str){
     var self = this;
-    _.templateSettings = {
+    var settings = {
         interpolate: /\{\{(.+?)\}\}/g,
         evaluate: /\{\%(.+?)\%\}/g
     };
-    return _.template(str, self.values);
+    return _.template(str, settings)(self.values);
 };
 
 module.exports = Template;
