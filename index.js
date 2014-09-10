@@ -164,8 +164,13 @@ Template.prototype.create = function() {
         } else {
             if (!fs.existsSync(out)) {
                 stat = fs.statSync(file);
-                var str = self.parse(fs.readFileSync(file, 'utf8'));
-                fs.writeFileSync(out, str, {
+                var buf = fs.readFileSync(file);
+                var str = buf.toString();
+                var parsed = self.parse(str);
+                // If the parsed content is no different than the original,
+                // write out the buffer to prevent encoding issues (e.g. images)
+                var content = str === parsed ? buf : parsed;
+                fs.writeFileSync(out, content, {
                     mode: stat.mode
                 });
                 if (written === false) {
