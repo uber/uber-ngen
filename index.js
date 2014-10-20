@@ -92,7 +92,7 @@ Template.prototype.init = function(dest, callback) {
                     return acc;
                 }, {});
             self.create();
-            if (callback) callback();
+            if (callback) callback(null, self.values);
         } else {
             done(null, self.values[key]);
         }
