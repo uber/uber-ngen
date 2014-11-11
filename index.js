@@ -53,7 +53,9 @@ Template.prototype.init = function(dest, callback) {
     var vars = self.mod;
     var keys = Object.keys(vars);
 
-    self.values.project = path.basename(dest);
+    if (dest) {
+        self.values.project = path.basename(dest);
+    }
     self.dest = dest;
     // print new line for pretties.
     self.logger.log();
