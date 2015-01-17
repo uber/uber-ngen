@@ -19,7 +19,7 @@ function fetchFromGitConfig(key) {
 
         proc.stdout.once('data', function (chunk) {
             called = true;
-            callback(null, chunk);
+            callback(null, String(chunk));
         });
         proc.stdout.once('error', callback);
         proc.stdout.once('end', function () {
