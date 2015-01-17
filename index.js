@@ -89,8 +89,8 @@ Template.prototype.init = function(dest, callback) {
                 self.dest = self.values.project;
             }
             self.variables = Object.keys(vars)
-                .reduce(function (acc, key) {
-                    acc[key] = self.values[key];
+                .reduce(function (acc, key2) {
+                    acc[key2] = self.values[key2];
                     return acc;
                 }, {});
             self.create();
