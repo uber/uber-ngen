@@ -8,8 +8,6 @@
 
 <!-- [![NPM][npm-png]][npm] -->
 
-<!-- [![browser support][test-png]][test] -->
-
 {{description}}
 
 ## Example

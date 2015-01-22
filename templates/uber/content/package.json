@@ -11,37 +11,44 @@
     "url": "https://github.com/uber/{{project}}/issues",
     "email": "{{email}}"
   },
+  "contributors": [{
+    "name": "{{gitName}}"
+  }],
   "dependencies": {
   },
   "devDependencies": {
-    "tape": "^2.12.3",
-    "jshint": "^2.5.0",
-    "istanbul": "^0.2.7",
-    "tap-spec": "^0.1.8",
-    "pre-commit": "0.0.5",
     "coveralls": "^2.10.0",
-    "opn": "^0.1.2"
+    "istanbul": "^0.3.5",
+    "lint-trap": "^1.0.0",
+    "opn": "^1.0.1",
+    "pre-commit": "0.0.9",
+    "tap-spec": "^2.1.1",
+    "tape": "^3.4.0",
+    "uber-licence": "git+ssh://git@github.com:uber/uber-licence"
   },
   "licenses": [{
     "type": "MIT",
     "url": "http://github.com/uber/{{project}}/raw/master/LICENSE"
   }],
   "scripts": {
-    "test": "npm run jshint -s && node test/index.js | tap-spec",
+    "test": "npm run jshint -s && npm run cover -s",
+    "add-licence": "uber-licence",
+    "check-cover": "istanbul check-coverage --branches=100 --lines=100 --functions=100",
+    "check-licence": "uber-licence --dry",
+    "cover": "istanbul cover --report html --print detail -- test/index.js && npm run check-cover -s",
+    "jshint": "lint-trap .",
+    "travis": "npm run cover -s && istanbul report lcov && ((cat coverage/lcov.info | coveralls) || exit 0)",
     "unit-test": "node test/index.js | tap-spec",
-    "jshint-pre-commit": "jshint --verbose $(git diff --cached --name-only | grep '\\.js$')",
-    "jshint": "jshint --verbose $(git ls-files | grep '\\.js$')",
-    "cover": "istanbul cover --report none --print detail test/index.js",
-    "view-cover": "istanbul report html && opn ./coverage/index.html",
-    "travis": "npm run cover -s && istanbul report lcov && ((cat coverage/lcov.info | coveralls) || exit 0)"
+    "view-cover": "opn ./coverage/index.html"
   },
   "engine": {
     "node": ">= 0.8.x"
   },
   "pre-commit": [
-    "jshint-pre-commit",
-    "unit-test"
+    "check-licence",
+    "test"
   ],
+  "pre-commit.silent": true,
   "private": true,
   "uber-ngen-version": "{{version}}"
 }
