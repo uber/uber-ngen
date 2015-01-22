@@ -1,5 +1,7 @@
-function {{projectName}}() {
-    
-}
+'use strict';
 
 module.exports = {{projectName}};
+
+function {{projectName}}() {
+
+}
