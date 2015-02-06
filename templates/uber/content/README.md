@@ -22,7 +22,7 @@ var {{projectName}} = require("{{project}}");
 
 // TODO. Explain what your module achieves and why.
 
-## Docs
+## API Documentation
 
 ### `var someValue = {{projectName}}(/*arguments*/)`
 
