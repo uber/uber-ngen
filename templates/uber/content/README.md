@@ -31,7 +31,7 @@ var {{projectName}} = require("{{project}}");
   https://github.com/jsigbiz/spec
 -->
 ```ocaml
-{{project}} := (arg: Any) => void
+{{project}} : (arg: Any) => void
 ```
 
 // TODO. State what the module does.
