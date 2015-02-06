@@ -18,6 +18,10 @@ var {{projectName}} = require("{{project}}");
 // TODO. Show example
 ```
 
+## Concept and Motivation
+
+// TODO. Explain what your module achieves and why.
+
 ## Docs
 
 ### `var someValue = {{projectName}}(/*arguments*/)`
