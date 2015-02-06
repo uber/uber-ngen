@@ -35,12 +35,14 @@
     }
   ],
   "scripts": {
-    "test": "npm run jshint -s && npm run cover -s",
     "add-licence": "uber-licence",
     "check-cover": "istanbul check-coverage --branches=100 --lines=100 --functions=100",
     "check-licence": "uber-licence --dry",
-    "cover": "istanbul cover --report html --print detail -- test/index.js && npm run check-cover -s",
-    "jshint": "lint-trap .",
+    "check-ls": "npm ls 1>/dev/null",
+    "cover": "npm run test-cover -s && npm run check-cover -s",
+    "lint": "lint-trap .",
+    "test": "npm run check-ls -s && npm run lint -s && npm run cover -s",
+    "test-cover": "istanbul cover --report html --print detail -- test/index.js",
     "trace": "itape test/index.js --trace",
     "travis": "npm run cover -s && istanbul report lcov && ((cat coverage/lcov.info | coveralls) || exit 0)",
     "view-cover": "opn ./coverage/index.html"
