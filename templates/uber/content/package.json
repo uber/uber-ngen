@@ -26,7 +26,7 @@
     "opn": "^1.0.1",
     "pre-commit": "0.0.9",
     "tape": "^3.4.0",
-    "uber-licence": "git+ssh://git@github.com:uber/uber-licence"
+    "uber-licence": "^1.2.0"
   },
   "licenses": [
     {
