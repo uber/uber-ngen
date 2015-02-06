@@ -61,7 +61,9 @@ module.exports = {
     gitName: fetchFromGitConfig('user.name'),
     email: fetchFromGitConfig('user.email'),
     projectNoDash: function readProjectNoDash(values, cb) {
-        cb(null, values.project.replace(/\-/g, ''));
+        cb(null, values.project
+            .replace(/\-/g, '')
+            .toLowerCase());
     },
     projectName: function readProjectName(values, callback) {
         callback(null, camelize(values.project));
