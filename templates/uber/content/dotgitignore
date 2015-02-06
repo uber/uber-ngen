@@ -40,6 +40,7 @@ node_modules/
 dump.rdb
 *.tap
 *.xml
+coverage/
 
 # OS generated files #
 ######################
@@ -48,17 +49,3 @@ dump.rdb
 ehthumbs.db
 Icon?
 Thumbs.db
-coverage
-
-# Text Editor Byproducts #
-##########################
-*.sw?
-.idea/
-
-# Python object code
-##########################
-*.py[oc]
-
-# All translation files #
-#########################
-static/translations-s3/
