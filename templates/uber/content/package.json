@@ -21,6 +21,7 @@
   "devDependencies": {
     "coveralls": "^2.10.0",
     "istanbul": "^0.3.5",
+    "itape": "^1.5.0",
     "lint-trap": "^1.0.0",
     "opn": "^1.0.1",
     "pre-commit": "0.0.9",
@@ -41,6 +42,7 @@
     "check-licence": "uber-licence --dry",
     "cover": "istanbul cover --report html --print detail -- test/index.js && npm run check-cover -s",
     "jshint": "lint-trap .",
+    "trace": "itape test/index.js --trace",
     "travis": "npm run cover -s && istanbul report lcov && ((cat coverage/lcov.info | coveralls) || exit 0)",
     "unit-test": "node test/index.js | tap-spec",
     "view-cover": "opn ./coverage/index.html"
@@ -53,6 +55,18 @@
     "test"
   ],
   "pre-commit.silent": true,
+  "itape": {
+    "trace": {
+      "debuglog": [
+        "{{projectNoDash}}"
+      ],
+      "leakedHandles": {
+        "timeout": 5001,
+        "debugSockets": true
+      },
+      "formatStack": true
+    }
+  },
   "private": true,
   "uber-ngen-version": "{{version}}"
 }
