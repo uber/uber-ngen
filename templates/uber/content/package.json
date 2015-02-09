@@ -5,50 +5,68 @@
   "keywords": [],
   "author": "{{gitName}} <{{email}}>",
   "repository": "git://github.com/uber/{{project}}.git",
-  "main": "index",
+  "main": "index.js",
   "homepage": "https://github.com/uber/{{project}}",
   "bugs": {
     "url": "https://github.com/uber/{{project}}/issues",
     "email": "{{email}}"
   },
-  "contributors": [{
-    "name": "{{gitName}}"
-  }],
+  "contributors": [
+    {
+      "name": "{{gitName}}"
+    }
+  ],
   "dependencies": {
   },
   "devDependencies": {
     "coveralls": "^2.10.0",
     "istanbul": "^0.3.5",
+    "itape": "^1.5.0",
     "lint-trap": "^1.0.0",
     "opn": "^1.0.1",
     "pre-commit": "0.0.9",
-    "tap-spec": "^2.1.1",
     "tape": "^3.4.0",
-    "uber-licence": "git+ssh://git@github.com:uber/uber-licence"
+    "uber-licence": "^1.2.0"
   },
-  "licenses": [{
-    "type": "MIT",
-    "url": "http://github.com/uber/{{project}}/raw/master/LICENSE"
-  }],
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "http://github.com/uber/{{project}}/raw/master/LICENSE"
+    }
+  ],
   "scripts": {
-    "test": "npm run jshint -s && npm run cover -s",
     "add-licence": "uber-licence",
     "check-cover": "istanbul check-coverage --branches=100 --lines=100 --functions=100",
     "check-licence": "uber-licence --dry",
-    "cover": "istanbul cover --report html --print detail -- test/index.js && npm run check-cover -s",
-    "jshint": "lint-trap .",
+    "check-ls": "npm ls 1>/dev/null",
+    "cover": "npm run test-cover -s && npm run check-cover -s",
+    "lint": "lint-trap .",
+    "test": "npm run check-ls -s && npm run lint -s && npm run cover -s",
+    "test-cover": "istanbul cover --report html --print detail -- test/index.js",
+    "trace": "itape test/index.js --trace",
     "travis": "npm run cover -s && istanbul report lcov && ((cat coverage/lcov.info | coveralls) || exit 0)",
-    "unit-test": "node test/index.js | tap-spec",
     "view-cover": "opn ./coverage/index.html"
   },
-  "engine": {
-    "node": ">= 0.8.x"
+  "engines": {
+    "node": ">= 0.10.x"
   },
   "pre-commit": [
     "check-licence",
     "test"
   ],
   "pre-commit.silent": true,
+  "itape": {
+    "trace": {
+      "debuglog": [
+        "{{projectNoDash}}"
+      ],
+      "leakedHandles": {
+        "timeout": 5001,
+        "debugSockets": true
+      },
+      "formatStack": true
+    }
+  },
   "private": true,
   "uber-ngen-version": "{{version}}"
 }

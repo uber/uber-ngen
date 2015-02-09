@@ -18,16 +18,20 @@ var {{projectName}} = require("{{project}}");
 // TODO. Show example
 ```
 
-## Docs
+## Concept and Motivation
+
+// TODO. Explain what your module achieves and why.
+
+## API Documentation
 
 ### `var someValue = {{projectName}}(/*arguments*/)`
 
 <!--
   This is a jsig notation of your interface.
-  https://github.com/Raynos/jsig
+  https://github.com/jsigbiz/spec
 -->
 ```ocaml
-{{project}} := (arg: Any) => void
+{{project}} : (arg: Any) => void
 ```
 
 // TODO. State what the module does.
@@ -39,6 +43,16 @@ var {{projectName}} = require("{{project}}");
 ## Tests
 
 `npm test`
+
+## NPM scripts
+
+ - `npm run add-licence` This will add the licence headers.
+ - `npm run cover` This runs the tests with code coverage
+ - `npm run lint` This will run the linter on your code
+ - `npm test` This will run the tests.
+ - `npm run trace` This will run your tests in tracing mode.
+ - `npm run travis` This is run by travis.CI to run your tests
+ - `npm run view-cover` This will show code coverage in a browser
 
 ## Contributors
 
