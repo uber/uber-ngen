@@ -146,6 +146,12 @@ It is not recommended you commit these new JSON files, the
   `git add -p` to cherry pick the new changes you want from the
   scaffolder.
 
+
+### JSON
+
+You can pass in service attributes eg projectName, hasCelery in json form, instead of prompting
+  the user.
+
 ## Installation
 
 `npm install uber-ngen`

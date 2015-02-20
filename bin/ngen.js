@@ -45,6 +45,12 @@ function main(opts, callback) {
     opts.description = opts.description || opts._[1];
 
     opts.logger = opts.logger || console;
+    if (opts.json) {
+        opts.jsonValues = require(opts.json);
+    } else {
+        opts.jsonValues = {};
+    }
+
 
     // create template
     var tmpl = new Template(opts.template, opts);

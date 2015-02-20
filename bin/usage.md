@@ -13,6 +13,7 @@ Options:
     --name=[str]            Set name of project
     --description=[str]     Set description of project
     --update-json           extend files in target folder
+    --json                  Pass in service attributes in json format instead of getting prompted.
 {options}
 
  - `--template` defaults to `{template}`

@@ -39,6 +39,13 @@ function Template(name, opts) {
         if (e.code !== 'MODULE_NOT_FOUND') { throw e; }
         this.exclusions = [];
     }
+    this.fromJson = false;
+    // Allowing overriding of values to be passed in instead of gathering them from user input.
+    if (Object.keys(opts.jsonValues).length && Object.keys(opts.jsonValues).length > 0) {
+        this.values = extend(
+            this.values, opts.jsonValues);
+        this.fromJson = true;
+    }
 }
 
 /**
@@ -99,8 +106,15 @@ Template.prototype.init = function(dest, callback) {
             done(null, self.values[key]);
         }
     }
-
-    parseLocal();
+    if (!self.fromJson) {
+        parseLocal();
+    } else {
+        if (!self.dest) {
+            self.dest = self.values.project;
+        }
+        self.create();
+        if (callback) callback(null, self.values);
+    }
 };
 
 /**
