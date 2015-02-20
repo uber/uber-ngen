@@ -41,7 +41,7 @@ function Template(name, opts) {
     }
     this.fromJson = false;
     // Allowing overriding of values to be passed in instead of gathering them from user input.
-    if (opts.jsonValues.length && opts.jsonValues.length > 0) {
+    if (Object.keys(opts.jsonValues).length && Object.keys(opts.jsonValues).length > 0) {
         this.values = extend(
             this.values, opts.jsonValues);
         this.fromJson = true;
@@ -60,6 +60,9 @@ Template.prototype.init = function(dest, callback) {
     var vars = self.mod;
     var keys = Object.keys(vars);
 
+    if (dest) {
+        self.values.project = path.basename(dest);
+    }
     self.dest = dest;
     // print new line for pretties.
     self.logger.log();
@@ -91,8 +94,6 @@ Template.prototype.init = function(dest, callback) {
         } else if (key === undefined) {
             if (!self.dest) {
                 self.dest = self.values.project;
-            } else {
-                self.values.project = path.basename(self.dest);
             }
             self.variables = Object.keys(vars)
                 .reduce(function (acc, key2) {
@@ -108,11 +109,8 @@ Template.prototype.init = function(dest, callback) {
     if (!self.fromJson) {
         parseLocal();
     } else {
-        //TODO: reconcile with lines 93:97
         if (!self.dest) {
             self.dest = self.values.project;
-        } else {
-            self.values.project = path.basename(self.dest);
         }
         self.create();
         if (callback) callback(null, self.values);
