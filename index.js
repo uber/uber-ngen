@@ -32,13 +32,6 @@ function Template(name, opts) {
     });
     this.updateJSON = opts['update-json'];
     this.directories = {};
-    //TODO make this a bit less janky
-    try {
-        this.exclusions = require(this.path + '/exclude.js')(this.values);
-    } catch(e) {
-        if (e.code !== 'MODULE_NOT_FOUND') { throw e; }
-        this.exclusions = [];
-    }
     this.fromJson = false;
     // Allowing overriding of values to be passed in instead of gathering them from user input.
     if (Object.keys(opts.jsonValues).length && Object.keys(opts.jsonValues).length > 0) {
@@ -70,6 +63,8 @@ Template.prototype.init = function(dest, callback) {
     function parseLocal() {
         var desc;
         var key = keys.shift();
+
+        self.values.name = self.name;
 
         function done(err, value) {
             if (err) {
@@ -127,6 +122,14 @@ Template.prototype.init = function(dest, callback) {
 Template.prototype.files = function() {
     var self = this;
     var files = [];
+
+    //TODO make this a bit less janky
+    try {
+        this.exclusions = require(this.path + '/exclude.js')(this.values);
+    } catch(e) {
+        if (e.code !== 'MODULE_NOT_FOUND') { throw e; }
+        this.exclusions = [];
+    }
 
     (function readdirs(dir) {
         fs.readdirSync(dir).forEach(function(file){
