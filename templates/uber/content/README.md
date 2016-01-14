@@ -24,16 +24,6 @@ var {{projectName}} = require("{{project}}");
 
 ## API Documentation
 
-### `var someValue = {{projectName}}(/*arguments*/)`
-
-<!--
-  This is a jsig notation of your interface.
-  https://github.com/jsigbiz/spec
--->
-```ocaml
-{{project}} : (arg: Any) => void
-```
-
 // TODO. State what the module does.
 
 ## Installation
