@@ -2,6 +2,38 @@
 
 `uber-ngen` is a scaffolding module used to scaffold out
   any kind of project.
+  
+## Using `uber-ngen`
+
+To use this tool:
+
+ - `npm install uber-ngen --global`
+ - `uber-ngen`
+
+When running `uber-ngen` you will be prompted:
+
+```
+raynos at raynos-ThinkPad-T440p  ~/uber
+$ uber-ngen
+
+Project name: my-thingy-localizer
+Project description: Localized the thingies
+Is open source? [Y/n]: n
+```
+
+Fill out the questions. You can then get started:
+
+ - `cd $projectName`
+ - `git init`
+ - `git add .`
+ - `git commit -m 'Initial commit'`
+ - `git remote add origin $remote`
+ - `git push origin master`
+ - `npm install`
+ - `npm test`
+
+Once you've got your tests passing your ready to 
+write some new code.
 
 ## Creating a template for ngen
 
