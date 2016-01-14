@@ -58,6 +58,17 @@ module.exports = {
             prompt('  Project description: ', callback);
         }
     },
+    open: function (values, cb) {
+        prompt('Is open source? [Y/n]:', onResult);
+
+        function onResult(err, res) {
+            var bool = true;
+            if (res === 'n') {
+                bool = false;
+            }
+            cb(null, bool);
+        }
+    },
     gitName: fetchFromGitConfig('user.name'),
     email: fetchFromGitConfig('user.email'),
     projectNoDash: function readProjectNoDash(values, cb) {
