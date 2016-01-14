@@ -39,7 +39,9 @@ var {{projectName}} = require("{{project}}");
  - `npm run cover` This runs the tests with code coverage
  - `npm run lint` This will run the linter on your code
  - `npm test` This will run the tests.
- - `npm run view-cover` This will show code coverage in a browser
+ - `npm run view-cover` This will show code coverage in a browser{% if (open) { %}
+ - `npm run check-licence` This will verify all files are licenced
+ - `npm run add-licence` This will add licence files{% } %}
 
 ## Contributors
 
