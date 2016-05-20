@@ -169,7 +169,9 @@ Template.prototype.create = function() {
             uri.replace(self.contentPath, ''));
         var stat;
 
-        out = out.replace("dotgitignore", ".gitignore");
+        out = out
+          .replace("dotgitignore", ".gitignore")
+          .replace("dotnpmignore", ".npmignore");
 
         // directory
         if (self.directories[file]) {
